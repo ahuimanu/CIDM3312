@@ -1,8 +1,23 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    @* ViewData["Title"] = "Home Page"; *@
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @* <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" /> *@
+    <title>Index</title>
+</head>
+
+
+<html>
+    <body>
+        <div class="text-center">
+            <h3> We're going to have an exciting party!</h3>
+            <h4>And YOU are invited!</h4>
+            <a class="btn btn-primary" asp-action="RsvpForm">RSVP Now</a>
+        </div>
+    </body>
+</html>
