@@ -12,55 +12,78 @@ namespace client
         static void Main(string[] args)
         {
 
-            IEnumerable<IrisRecord> records = LoadIrisData();
-            IEnumerable<IrisRecord> filtered;
+            string[] words = { "the", "quick", "brown", "fox", "jumps" };  
+            List<string> wordslist = new List<string>(words);
 
-            if(records != null)
-            {
-                //print all
-                // PrintRecords("unfiltered", records);
+            PrintRecords("simple words list", words);
 
-                // filter: all petal widths are at or above 4.0
-                float boundary = 4.0f;
-                // filtered = records.Where(n => n.PetalWidth >= boundary);
-                // PrintRecords($"Petal Width at or above {boundary}", filtered);
+            // fluent or method syntax
+            // filter - where
+            // sort - orderby
+            // group - groupby
 
-                /*
-                from num in numbers
-                    where num % 2 == 0
-                    orderby num
-                    select num;
-                */
 
-                var otherfilter = 
-                    from record in records
-                    where record.PetalLength < boundary
-                    select record;
+            // var query2 = words.Where<string>(w => w.Length == 3);
+            
+            // // query syntax
+            // IEnumerable<string> query = from word in words  
+            //                             where word.Length == 3  
+            //                             select word;  
+            
+            // foreach (string str in query)  
+            //     Console.WriteLine(str); 
 
-                PrintRecords($"Petal Length at or below {boundary}", otherfilter);                    
+            // IEnumerable<IrisRecord> records = LoadIrisData();
+            // IEnumerable<IrisRecord> filtered;
 
-                // complete all of the queries here
+            // if(records != null)
+            // {
+            //     //print all
+            //     // PrintRecords("unfiltered", records);
 
-                /*
-                Create and show a LINQ Query that lists all Sepal Widths that are above the average Sepal Width
-                Create and show a LINQ Query that lists all Sepal Lengths that are below the average Sepal Length
-                Create and show a LINQ Query that indicates which class of iris has the lowest average Petal Width
-                Create and show a LINQ Query that indicates which class of iris has the highest average Petal Length
-                Create and show a LINQ Query that indicates the widest Sepal Width for each class of iris
-                Create and show a LINQ Query that indicates the shortest Sepal Length for each class of iris
-                Create and show a LINQ Query that indicates the ranks the top 5 widest Petal Widths
-                Create and show a LINQ Query that indicates the ranks the bottom 5 shortest Petal Lengths
-                Create and show a LINQ Query that indicates the median Sepal Width for each class of iris
-                Create and show a LINQ Query that indicates the mode Petal Length for each class of iris
-                */
-            }
+            //     // filter: all petal widths are at or above 4.0
+            //     float boundary = 4.0f;
+            //     // filtered = records.Where(n => n.PetalWidth >= boundary);
+            //     // PrintRecords($"Petal Width at or above {boundary}", filtered);
+
+
+
+            //     /*
+            //     from num in numbers
+            //         where num % 2 == 0
+            //         orderby num
+            //         select num;
+            //     */
+
+            //     // var otherfilter = 
+            //     //     from record in records
+            //     //     where record.PetalLength < boundary
+            //     //     select record;
+
+            //     // PrintRecords($"Petal Length at or below {boundary}", otherfilter);                    
+
+            //     // complete all of the queries here
+
+            //     /*
+            //     Create and show a LINQ Query that lists all Sepal Widths that are above the average Sepal Width
+            //     Create and show a LINQ Query that lists all Sepal Lengths that are below the average Sepal Length
+            //     Create and show a LINQ Query that indicates which class of iris has the lowest average Petal Width
+            //     Create and show a LINQ Query that indicates which class of iris has the highest average Petal Length
+            //     Create and show a LINQ Query that indicates the widest Sepal Width for each class of iris
+            //     Create and show a LINQ Query that indicates the shortest Sepal Length for each class of iris
+            //     Create and show a LINQ Query that indicates the ranks the top 5 widest Petal Widths
+            //     Create and show a LINQ Query that indicates the ranks the bottom 5 shortest Petal Lengths
+            //     Create and show a LINQ Query that indicates the median Sepal Width for each class of iris
+            //     Create and show a LINQ Query that indicates the mode Petal Length for each class of iris
+            //     */
+            // }
         }
 
-        static void PrintRecords(string message, IEnumerable<IrisRecord> records)
+        static void PrintRecords(string message, IEnumerable<Object> records)
         {
             // simplest query shows all records
             Console.WriteLine(message);
-            foreach(IrisRecord record in records)
+            foreach(Object record in records)
             {
                 Console.WriteLine(record);
             }
