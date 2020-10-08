@@ -84,8 +84,11 @@ namespace VatsimLibrary
         // time_logon:
         public static readonly int TIME_LOGON_INDEX = 37;
         // heading:
+        public static readonly int HEADING_INDEX = 38;
         // QNH_iHg:
+        public static readonly int QNH_IHG_INDEX = 39;
         // QNH_Mb:        
+        public static readonly int QNH_MB_INDEX = 40;
 
         /* Sample fields and data */
         /*
@@ -174,6 +177,12 @@ namespace VatsimLibrary
         public string QNH_iHg { get; set; }
         public string QNH_Mb { get; set; }
 
+        /// <summary>
+        /// Read a line from the vatsim data file and parse out appropriate VatsimClientRecord object.
+        /// https://status.vatsim.net/
+        /// </summary>
+        /// <param name="line">A line containing client data from vatsim-data.txt</param>
+        /// <returns>VatsimClientRecord object</returns>
         public static VatsimClientRecord GetVatsimClientRecord(string line)
         {
 
@@ -181,77 +190,269 @@ namespace VatsimLibrary
 
             string[] parts = line.Split(FIELD_DELIMITER);
 
-            // callsign
-            record.Callsign = parts[0];
-            // cid
-            record.Cid = parts[1];
-            // realname
-            record.Realname = parts[2];
-            // clienttype
-            record.Clienttype = parts[3];
-            // frequency
-            record.Frequency = parts[4];
-            // latitude
-            record.Latitude = parts[5];
-            // longitude
-            record.Longitude = parts[6];
-            // altitude
-            record.Altitude = parts[7];
-            // groundspeed
-            record.Groundspeed = parts[8];
-            // planned_aircraft
-            record.PlannedAircraft = parts[9];
-            // planned_tascruise
-            record.PlannedTascruise = parts[10];
-            // planned_depairport
-            record.PlannedDepairport = parts[11];
-            // planned_altitude
-            record.PlannedAltitude = parts[12];
-            // planned_destairport
-            record.PlannedDepairport = parts[13];
-            // server
-            record.Server = parts[14];
-            // protrevision
-            record.Protrevision = parts[15];
-            // rating
-            record.Rating = parts[16];
-            // transponder
-            record.Transponder = parts[17];
-            // facilitytype
-            record.Facilitytype = parts[18];
-            // visualrange
-            record.Visualrange = parts[19];
-            // planned_revision
-            record.PlannedRevision = parts[20];
-            // planned_flighttype
-            record.PlannedFlighttype = parts[21];
-            // planned_deptime
-            record.PlannedDeptime = parts[22];
-            // planned_actdeptime
-            record.PlannedActdeptime = parts[23];
-            // planned_hrsenroute
-            record.PlannedHrsenroute = parts[24];
-            // planned_minenroute
-            record.PlannedMinenroute = parts[25];
-            // planned_hrsfuel
-            record.PlannedHrsfuel = parts[26];
-            // planned_minfuel
-            // planned_altairport
-            // planned_remarks
-            // planned_route
-            // planned_depairport_lat
-            // planned_depairport_lon
-            // planned_destairport_lat
-            // planned_destairport_lon
-            // atis_message
-            // time_last_atis_received
-            // time_logon
-            // heading
-            // QNH_iHg
-            // QNH_Mb
+            // Console.WriteLine($"NUMBER OF PARTS: {parts.Length}");
 
+            if(parts.Length == 42)
+            {
+                // callsign
+                record.Callsign = parts[CALLSIGN_INDEX];
+                // cid
+                record.Cid = parts[CID_INDEX];
+                // realname
+                record.Realname = parts[REALNAME_INDEX];
+                // clienttype
+                record.Clienttype = parts[CLIENTTYPE_INDEX];
+                // frequency
+                record.Frequency = parts[FREQUENCY_INDEX];
+                // latitude
+                record.Latitude = parts[LATITUDE_INDEX];
+                // longitude
+                record.Longitude = parts[LONGITUDE_INDEX];
+                // altitude
+                record.Altitude = parts[ALTITUDE_INDEX];
+                // groundspeed
+                record.Groundspeed = parts[GROUNDSPEED_INDEX];
+                // planned_aircraft
+                record.PlannedAircraft = parts[PLANNED_AIRCRAFT_INDEX];
+                // planned_tascruise
+                record.PlannedTascruise = parts[PLANNED_TASCRUISE_INDEX];
+                // planned_depairport
+                record.PlannedDepairport = parts[PLANNED_DEPAIRPORT_INDEX];
+                // planned_altitude
+                record.PlannedAltitude = parts[PLANNED_ALTITUDE_INDEX];
+                // planned_destairport
+                record.PlannedDepairport = parts[PLANNED_DEPAIRPORT_INDEX];
+                // server
+                record.Server = parts[SERVER_INDEX];
+                // protrevision
+                record.Protrevision = parts[PROTREVISION_INDEX];
+                // rating
+                record.Rating = parts[RATING_INDEX];
+                // transponder
+                record.Transponder = parts[TRANSPONDER_INDEX];
+                // facilitytype
+                record.Facilitytype = parts[FACILITYTYPE_INDEX];
+                // visualrange
+                record.Visualrange = parts[VISUALRANGE_INDEX];
+                // planned_revision
+                record.PlannedRevision = parts[PLANNED_REVISION_INDEX];
+                // planned_flighttype
+                record.PlannedFlighttype = parts[PLANNED_FLIGHTTYPE_INDEX];
+                // planned_deptime
+                record.PlannedDeptime = parts[PLANNED_DEPTIME_INDEX];
+                // planned_actdeptime
+                record.PlannedActdeptime = parts[PLANNED_ACTDEPTIME_INDEX];
+                // planned_hrsenroute
+                record.PlannedHrsenroute = parts[PLANNED_HRSENROUTE_INDEX];
+                // planned_minenroute
+                record.PlannedMinenroute = parts[PLANNED_MINENROUTE_INDEX];
+                // planned_hrsfuel
+                record.PlannedHrsfuel = parts[PLANNED_HRSFUEL_INDEX];
+                // planned_minfuel
+                record.PlannedMinfuel = parts[PLANNED_MINFUEL_INDEX];
+                // planned_altairport
+                record.PlannedAltairport = parts[PLANNED_ALTAIRPORT_INDEX];
+                // planned_remarks
+                record.PlannedRemarks = parts[PLANNED_REMARKS_INDEX];
+                // planned_route
+                record.PlannedRoute = parts[PLANNED_ROUTE_INDEX];
+                // planned_depairport_lat
+                record.PlannedDepairportLat = parts[PLANNED_DEPAIRPORT_LAT_INDEX];
+                // planned_depairport_lon
+                record.PlannedDepairportLon = parts[PLANNED_DEPAIRPORT_LON_INDEX];
+                // planned_destairport_lat
+                record.PlannedDestairportLat = parts[PLANNED_DESTPAIRPORT_LAT_INDEX];
+                // planned_destairport_lon
+                record.PlannedDestairportLon = parts[PLANNED_DESTAIRPORT_LON_INDEX];
+                // atis_message
+                record.AtisMessage = parts[ATIS_MESSAGE_INDEX];
+                // time_last_atis_received
+                record.TimeLastAtisReceived = parts[TIME_LAST_ATIS_RECEIVED_INDEX];
+                // time_logon
+                record.TimeLogon = parts[TIME_LOGON_INDEX];
+                // heading
+                record.Heading = parts[HEADING_INDEX];
+                // QNH_iHg
+                record.QNH_iHg = parts[QNH_IHG_INDEX];
+                // QNH_Mb
+                record.QNH_Mb = parts[QNH_MB_INDEX];
 
-            return null;
+            }
+
+            return record;
+
+        }
+
+        public override string ToString()
+        {
+
+            string output = "";
+
+            // callsign:
+            output += $"Callsign: {this.Callsign}";
+            output += Environment.NewLine;
+            
+            // cid:
+            output += $"CID: {this.Cid}";            
+            output += Environment.NewLine;            
+            
+            // realname:
+            output += $"Real Name: {this.Realname}";
+            output += Environment.NewLine;            
+            
+            // clienttype:
+            output += $"Client Type: {this.Clienttype}";
+            output += Environment.NewLine;            
+            
+            // frequency:
+            output += $"Frequency: {this.Frequency}";
+            output += Environment.NewLine;            
+            
+            // latitude:
+            output += $"Latitude: {this.Latitude}";
+            output += Environment.NewLine;            
+            
+            // longitude:
+            output += $"Longitude: {this.Longitude}";
+            output += Environment.NewLine;            
+            
+            // altitude:
+            output += $"Altitude: {this.Altitude}";
+            output += Environment.NewLine;            
+            
+            // groundspeed:
+            output += $"Ground Speed: {this.Groundspeed}";
+            output += Environment.NewLine;            
+            
+            // planned_aircraft:
+            output += $"Planned Aircraft: {this.PlannedAircraft}";
+            output += Environment.NewLine;            
+            
+            // planned_tascruise:
+            output += $"Planned TAS Cruise: {this.PlannedTascruise}";
+            output += Environment.NewLine;            
+            
+            // planned_depairport:
+            output += $"Planned Departure Airport: {this.PlannedDepairport}";
+            output += Environment.NewLine;            
+            
+            // planned_altitude:
+            output += $"Planned Cruise Altitude: {this.PlannedAltitude}";
+            output += Environment.NewLine;            
+            
+            // planned_destairport:
+            output += $"Planned Destination Airport: {this.PlannedDestairport}";
+            output += Environment.NewLine;            
+            
+            // server:
+            output += $"Server: {this.Server}";
+            output += Environment.NewLine;            
+            
+            // protrevision:
+            output += $"Prot Revision: {this.Protrevision}";
+            output += Environment.NewLine;            
+            
+            // rating:
+            output += $"Rating: {this.Rating}";
+            output += Environment.NewLine;            
+            
+            // transponder:
+            output += $"Transponder: {this.Transponder}";
+            output += Environment.NewLine;            
+            
+            // facilitytype:
+            output += $"Facility Type: {this.Facilitytype}";
+            output += Environment.NewLine;            
+            
+            // visualrange:
+            output += $"Visual Range: {this.Visualrange}";
+            output += Environment.NewLine;            
+            
+            // planned_revision:
+            output += $"Planned Revision: {this.PlannedRevision}";
+            output += Environment.NewLine;            
+            
+            // planned_flighttype:
+            output += $"Planned Flight Type: {this.PlannedFlighttype}";
+            output += Environment.NewLine;            
+            
+            // planned_deptime:
+            output += $"Planned Departure Time: {this.PlannedDeptime}";
+            output += Environment.NewLine;            
+            
+            // planned_actdeptime:
+            output += $"Planned Actual Departure Time: {this.PlannedActdeptime}";
+            output += Environment.NewLine;            
+            
+            // planned_hrsenroute:
+            output += $"Planned Hours Enroute: {this.PlannedHrsenroute}";
+            output += Environment.NewLine;            
+            
+            // planned_minenroute:
+            output += $"Planned Minutes Enroute: {this.PlannedMinenroute}";
+            output += Environment.NewLine;            
+            
+            // planned_hrsfuel:
+            output += $"Planned Hours of Fuel: {this.PlannedHrsfuel}";
+            output += Environment.NewLine;            
+            
+            // planned_minfuel:
+            output += $"Planned Minutes of Fuel: {this.PlannedMinfuel}";
+            output += Environment.NewLine;            
+            
+            // planned_altairport:
+            output += $"Planned Alternate Airport: {this.PlannedAltairport}";
+            output += Environment.NewLine;            
+            
+            // planned_remarks:
+            output += $"Planned Remarks: {this.PlannedRemarks}";
+            output += Environment.NewLine;            
+            
+            // planned_route:
+            output += $"Planned Route: {this.PlannedRoute}";
+            output += Environment.NewLine;            
+            
+            // planned_depairport_lat:
+            output += $"Planned Departure Airport Latitude: {this.PlannedDepairportLat}";
+            output += Environment.NewLine;            
+            
+            // planned_depairport_lon:
+            output += $"Planned Departure Airport Longitude: {this.PlannedDepairportLon}";
+            output += Environment.NewLine;            
+            
+            // planned_destairport_lat:
+            output += $"Planned Destination Airport Latitude: {this.PlannedDestairportLat}";
+            output += Environment.NewLine;            
+            
+            // planned_destairport_lon:
+            output += $"Planned Destination Airport Longitude: {this.PlannedDestairportLon}";
+            output += Environment.NewLine;            
+            
+            // atis_message:
+            output += $"ATIS Message: {this.AtisMessage}";
+            output += Environment.NewLine;            
+            
+            // time_last_atis_received:
+            output += $"Time Last ATIS Received: {this.TimeLastAtisReceived}";
+            output += Environment.NewLine;            
+            
+            // time_logon:
+            output += $"Time Logon: {this.TimeLogon}";
+            output += Environment.NewLine;            
+            
+            // heading:
+            output += $"Heading: {this.Heading}";
+            output += Environment.NewLine;            
+            
+            // QNH_iHg:
+            output += $"QNH inches of mercury: {this.QNH_iHg}";
+            output += Environment.NewLine;            
+            
+            // QNH_Mb:
+            output += $"QNH Millibars: {this.QNH_Mb}";
+            output += Environment.NewLine;            
+
+            return output;
         }
     }
 }

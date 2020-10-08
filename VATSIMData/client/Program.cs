@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Threading.Tasks;
+using VatsimLibrary;
 
 namespace client
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("VATSIM Library");
+            await VatsimDataReader.ProcessVatsimData();
         }
     }
 }
