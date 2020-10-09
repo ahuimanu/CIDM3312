@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 // reference on HttpClient: http://zetcode.com/csharp/httpclient/
-namespace VatsimLibrary
+namespace VatsimLibrary.Data
 {
     public class VatsimDataReader
     {
@@ -113,6 +113,8 @@ namespace VatsimLibrary
 
                 // get clients
                 GetVatsimClientRecordsFromLines(lines);
+
+                // GetPilotsFromVatsimClientRecords();
 
                 // metadata
                 GetVatsimDataMetaDataFromLines(lines);

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VatsimLibrary
+namespace VatsimLibrary.Data
 {
     public class VatsimClientRecord
     {

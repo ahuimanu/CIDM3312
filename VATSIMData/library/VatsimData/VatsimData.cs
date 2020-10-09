@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace VatsimLibrary
+namespace VatsimLibrary.Data
 {
     public class VatsimData
     {

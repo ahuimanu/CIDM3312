@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace VatsimLibrary
+namespace VatsimLibrary.Client
 {
-    public class VatsimClient
+    public abstract class VatsimClient
     {
         /* Sample fields and data */
         /*
@@ -53,8 +53,7 @@ namespace VatsimLibrary
         public string Cid { get; set; }
         public string Realname { get; set; }
         public string Clienttype { get; set; }
-        public string Frequency { get; set; }
-        public string Latitude { get; set; }
+         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string Altitude { get; set; }
         public string Groundspeed { get; set; }
