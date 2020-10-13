@@ -1,6 +1,6 @@
 using System;
 
-namespace VatsimLibrary.Data
+namespace VatsimLibrary.VatsimData
 {
 
 }

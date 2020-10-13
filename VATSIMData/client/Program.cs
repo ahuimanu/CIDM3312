@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using VatsimLibrary;
-using VatsimLibrary.Data;
+using VatsimLibrary.VatsimData;
 
 namespace client
 {

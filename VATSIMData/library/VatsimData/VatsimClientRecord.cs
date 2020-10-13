@@ -1,6 +1,8 @@
 ﻿using System;
 
-namespace VatsimLibrary.Data
+using VatsimLibrary.VatsimClient;
+
+namespace VatsimLibrary.VatsimData
 {
     public class VatsimClientRecord
     {
@@ -453,6 +455,110 @@ namespace VatsimLibrary.Data
             output += Environment.NewLine;            
 
             return output;
+        }
+
+        public VatsimClientATC GetVatsimClientATCFromRecord()
+        {
+            VatsimClientATC atc = new VatsimClientATC();
+
+            atc.ATCCallsign = this.Callsign;
+            atc.Callsign = this.Callsign;
+            atc.Cid = this.Cid;
+            atc.Clienttype = this.Clienttype;
+            atc.Facilitytype = this.Facilitytype;
+            atc.Frequency = this.Frequency;
+            atc.Latitude = this.Latitude;
+            atc.Longitude = this.Longitude;
+            atc.Protrevision = this.Protrevision;
+            atc.Rating = this.Rating;
+            atc.Realname = this.Realname;
+            atc.Server = this.Server;
+            atc.TimeLastAtisReceived = this.TimeLastAtisReceived;
+            atc.TimeLogon = this.TimeLogon;
+            atc.Visualrange = this.Visualrange;
+            
+            return atc;
+        }
+
+        public VatsimClientPilot GetVatsimClientPilotFromRecord()
+        {
+            VatsimClientPilot pilot = new VatsimClientPilot();
+
+            pilot.Callsign = this.Callsign;
+            pilot.Cid = this.Cid;
+            pilot.Clienttype = this.Clienttype;
+            pilot.Latitude = this.Latitude;
+            pilot.Longitude = this.Longitude;
+            pilot.Realname = this.Realname;
+            pilot.Protrevision = this.Protrevision;
+            pilot.Server = this.Server;
+            pilot.TimeLastAtisReceived = this.TimeLastAtisReceived;
+            pilot.TimeLogon = this.TimeLogon;
+
+            return pilot;
+        }
+
+        public VatsimClientPlannedFlight GetVatsimClientPlannedFlightFromRecord()
+        {
+            VatsimClientPlannedFlight flight = new VatsimClientPlannedFlight();
+
+            flight.Callsign = this.Callsign;
+            flight.Cid = this.Cid;
+            flight.Clienttype = this.Clienttype;
+            flight.Latitude =  this.Latitude;
+            flight.Longitude = this.Longitude;
+            flight.PlannedActdeptime = this.PlannedActdeptime;
+            flight.PlannedAircraft = this.PlannedAircraft;
+            flight.PlannedAltairport = this.PlannedAltairport;
+            flight.PlannedAltitude = this.PlannedAltitude;
+            flight.PlannedDepairport = this.PlannedDepairport;
+            flight.PlannedDepairportLat = this.PlannedDepairportLat;
+            flight.PlannedDepairportLon = this.PlannedDepairportLon;
+            flight.PlannedDeptime = this.PlannedDeptime;
+            flight.PlannedDestairport = this.PlannedDestairport;
+            flight.PlannedDestairportLat = this.PlannedDestairportLat;
+            flight.PlannedDestairportLon = this.PlannedDestairportLon;
+            flight.PlannedFlighttype = this.PlannedFlighttype;
+            flight.PlannedHrsenroute = this.PlannedHrsenroute;
+            flight.PlannedHrsfuel = this.PlannedHrsfuel;
+            flight.PlannedMinenroute = this.PlannedMinenroute;
+            flight.PlannedMinfuel = this.PlannedMinfuel;
+            flight.PlannedRemarks = this.PlannedRemarks;
+            flight.PlannedRevision = this.PlannedRevision;
+            flight.PlannedRoute = this.PlannedRoute;
+            flight.PlannedTascruise = this.PlannedTascruise;
+            flight.Protrevision = this.Protrevision;
+            flight.Realname = this.Realname;
+            flight.Server = this.Server;
+            flight.TimeLastAtisReceived = this.TimeLastAtisReceived;
+            flight.TimeLogon = this.TimeLogon;
+
+            return flight;
+        }
+
+        public VatsimClientPilotSnapshot GetVatsimClientPilotSnapshotFromRecord()
+        {
+            VatsimClientPilotSnapshot position = new VatsimClientPilotSnapshot();
+
+            position.Altitude = this.Altitude;
+            position.Callsign = this.Callsign;
+            position.Cid = this.Cid;
+            position.Clienttype = this.Clienttype;
+            position.Groundspeed = this.Groundspeed;
+            position.Heading = this.Heading;
+            position.Latitude = this.Latitude;
+            position.Longitude = this.Longitude;
+            position.Protrevision = this.Protrevision;
+            position.QNH_iHg = this.QNH_iHg;
+            position.QNH_Mb = this.QNH_Mb;
+            position.Realname = this.Realname;
+            position.Server = this.Server;
+            position.TimeLastAtisReceived = this.TimeLastAtisReceived;
+            position.TimeLogon = this.TimeLogon;
+            position.TimeStamp = DateTime.Now;
+            position.Transponder = this.Transponder;
+
+            return position;
         }
     }
 }

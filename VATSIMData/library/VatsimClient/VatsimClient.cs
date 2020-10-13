@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VatsimLibrary.Client
+namespace VatsimLibrary.VatsimClient
 {
     public abstract class VatsimClient
     {
@@ -48,46 +48,15 @@ namespace VatsimLibrary.Client
         QNH_iHg:29.94:
         QNH_Mb:1014:
         */
-
         public string Callsign { get; set; }
         public string Cid { get; set; }
         public string Realname { get; set; }
         public string Clienttype { get; set; }
-         public string Latitude { get; set; }
+        public string Latitude { get; set; }
         public string Longitude { get; set; }
-        public string Altitude { get; set; }
-        public string Groundspeed { get; set; }
-        public string PlannedAircraft { get; set; }
-        public string PlannedTascruise { get; set; }
-        public string PlannedDepairport { get; set; }
-        public string PlannedAltitude { get; set; }
-        public string PlannedDestairport { get; set; }
         public string Server { get; set; }
         public string Protrevision { get; set; }
-        public string Rating { get; set; }
-        public string Transponder { get; set; }
-        public string Facilitytype { get; set; }
-        public string Visualrange { get; set; }
-        public string PlannedRevision { get; set; }
-        public string PlannedFlighttype { get; set; }
-        public string PlannedDeptime { get; set; }
-        public string PlannedActdeptime { get; set; }
-        public string PlannedHrsenroute { get; set; }
-        public string PlannedMinenroute { get; set; }
-        public string PlannedHrsfuel { get; set; }
-        public string PlannedMinfuel { get; set; }
-        public string PlannedAltairport { get; set; }
-        public string PlannedRemarks { get; set; }
-        public string PlannedRoute { get; set; }
-        public string PlannedDepairportLat { get; set; }
-        public string PlannedDepairportLon { get; set; }
-        public string PlannedDestairportLat { get; set; }
-        public string PlannedDestairportLon { get; set; }
-        public string AtisMessage { get; set; }
         public string TimeLastAtisReceived { get; set; }
         public string TimeLogon { get; set; }
-        public string Heading { get; set; }
-        public string QNH_iHg { get; set; }
-        public string QNH_Mb { get; set; }
     }
 }

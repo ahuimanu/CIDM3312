@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 // reference on HttpClient: http://zetcode.com/csharp/httpclient/
-namespace VatsimLibrary.Data
+namespace VatsimLibrary.VatsimData
 {
     public class VatsimDataReader
     {
@@ -243,7 +243,7 @@ namespace VatsimLibrary.Data
             if(data_result)
             {
                 GetVatsimClientRecordsFromLocalFile(VATSIM_LOCAL_DATA_FILE);
-                Console.WriteLine($"{CurrentVatsimData.VatsimClientRecords.Count} were created");
+                Console.WriteLine($"{CurrentVatsimData.VatsimClientRecords.Count} records were created");
                 // Console.WriteLine($"first:\n{CurrentVatsimData.VatsimClientRecords[0]}");
                 // Console.WriteLine($"last:\n{CurrentVatsimData.VatsimClientRecords[CurrentVatsimData.VatsimClientRecords.Count - 1]}");
             }
