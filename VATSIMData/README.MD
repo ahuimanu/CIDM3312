@@ -1,6 +1,6 @@
 # VATSIM Data with ENTITY FRAMEWORK CORE
 
-This program creates a library and client to fetch and load VATSIM flight data into a [SQLite database](https://sqlite.org/index.html) using [EntityFramework Core](Install-Package Microsoft.EntityFrameworkCore -Version 3.1.8).
+This program creates a library and client to fetch and load VATSIM flight data into a [SQLite database](https://sqlite.org/index.html) using [EntityFramework Core](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.1.9).
 
 We'll be able to review the data directly, and even double-check with SQL queries, using the [DB Browser for SQLite](https://sqlitebrowser.org/).
 
@@ -13,3 +13,16 @@ The lirbary reads from a text file on the Internet/WWW every two minutes and wri
 ## Client
 
 We will query for airports or aircraft to find flights where we can then view some basic data about those flights.
+
+## Entity Framework Core
+
+Follow the steps in this tutorial carefully: [Getting Started with EF Core](https://docs.microsoft.com/en-us/ef/core/get-started/?tabs=netcore-cli)
+
+In general, the concepts of [Entity Framework as an Object/Relational Mapper](https://docs.microsoft.com/en-us/ef/core/) are also mentioned in Microsoft's documentation.
+
+* **Install EF Core from Nuget** `dotnet add package Microsoft.EntityFrameworkCore.Sqlite`
+* **Install Tooling** `dotnet tool install --global dotnet-ef`
+* **Install Design Package** `dotnet add package Microsoft.EntityFrameworkCore.Design`
+* **Create Migration** `dotnet ef migrations add InitialCreate`
+* **Make changes to database** `dotnet ef database update`
+

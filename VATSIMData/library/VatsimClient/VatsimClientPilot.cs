@@ -20,6 +20,7 @@ namespace VatsimLibrary.VatsimClient
             if (record != null && record.Clienttype == "PILOT")
             {
                 if( this.Flight != null &&
+                    this.Flight.Cid == record.Cid &&
                     this.Flight.Callsign == record.Callsign &&
                     this.Flight.PlannedDepairport == record.PlannedDepairport &&
                     this.Flight.PlannedDestairport == record.PlannedDestairport &&
@@ -38,6 +39,7 @@ namespace VatsimLibrary.VatsimClient
         {
             if( this.Positions != null &&
                 this.Flight != null &&
+                this.Flight.Cid == record.Cid &&                
                 this.Flight.Callsign == record.Callsign &&
                 this.Flight.PlannedDepairport == record.PlannedDepairport &&
                 this.Flight.PlannedDestairport == record.PlannedDestairport &&
@@ -50,6 +52,20 @@ namespace VatsimLibrary.VatsimClient
                     this.Positions.Add(record.GetVatsimClientPilotSnapshotFromRecord());
                 }
             }
+        }
+
+        public void Update(VatsimClientPilot pilot)
+        {
+            this.Callsign = pilot.Callsign;
+            this.Cid = pilot.Cid;
+            this.Clienttype = pilot.Clienttype;
+            this.Latitude = pilot.Latitude;
+            this.Longitude = pilot.Longitude;
+            this.Protrevision = pilot.Protrevision;
+            this.Realname = pilot.Realname;
+            this.Server = pilot.Server;
+            this.TimeLastAtisReceived = pilot.TimeLastAtisReceived;
+            this.TimeLogon = pilot.TimeLogon;
         }
     }
 }

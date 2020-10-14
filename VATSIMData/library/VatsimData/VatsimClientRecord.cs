@@ -223,7 +223,7 @@ namespace VatsimLibrary.VatsimData
                 // planned_altitude
                 record.PlannedAltitude = parts[PLANNED_ALTITUDE_INDEX];
                 // planned_destairport
-                record.PlannedDepairport = parts[PLANNED_DEPAIRPORT_INDEX];
+                record.PlannedDestairport = parts[PLANNED_DESTAIRPORT_INDEX];
                 // server
                 record.Server = parts[SERVER_INDEX];
                 // protrevision
@@ -461,7 +461,6 @@ namespace VatsimLibrary.VatsimData
         {
             VatsimClientATC atc = new VatsimClientATC();
 
-            atc.ATCCallsign = this.Callsign;
             atc.Callsign = this.Callsign;
             atc.Cid = this.Cid;
             atc.Clienttype = this.Clienttype;

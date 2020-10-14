@@ -25,5 +25,39 @@ namespace VatsimLibrary.VatsimClient
         public string PlannedRoute { get; set; }
         public string PlannedTascruise { get; set; }
 
+        public void Update(VatsimClientPlannedFlight flight)
+        {
+            this.Cid = flight.Cid;
+            this.Callsign = flight.Callsign;
+            this.Clienttype = flight.Clienttype;
+            this.Latitude = flight.Latitude;
+            this.Longitude = flight.Longitude;
+            this.PlannedActdeptime = flight.PlannedActdeptime;
+            this.PlannedAircraft = flight.PlannedAircraft;
+            this.PlannedAltairport = flight.PlannedAltairport;
+            this.PlannedAltitude = flight.PlannedAltitude;
+            this.PlannedDepairport = flight.PlannedDepairport;
+            this.PlannedDepairportLat = flight.PlannedDepairportLat;
+            this.PlannedDepairportLon = flight.PlannedDepairportLon;
+            this.PlannedDeptime = flight.PlannedDeptime;
+            this.PlannedDestairport = flight.PlannedDestairport;
+            this.PlannedDestairportLat = flight.PlannedDestairportLat;
+            this.PlannedDestairportLon = flight.PlannedDestairportLon;
+            this.PlannedFlighttype = flight.PlannedFlighttype;
+            this.PlannedHrsenroute = flight.PlannedHrsenroute;
+            this.PlannedHrsfuel = flight.PlannedHrsfuel;
+            this.PlannedMinenroute = flight.PlannedMinenroute;
+            this.PlannedMinfuel = flight.PlannedMinfuel;
+            this.PlannedRemarks = flight.PlannedRemarks;
+            this.PlannedRevision = flight.PlannedRevision;
+            this.PlannedRoute = flight.PlannedRoute;
+            this.PlannedTascruise = flight.PlannedTascruise;
+            this.Protrevision = flight.Protrevision;
+            this.Realname = flight.Realname;
+            this.Server = flight.Server;
+            this.TimeLastAtisReceived = flight.TimeLastAtisReceived;
+            this.TimeLogon = flight.TimeLogon;
+        }
+
     }
 }

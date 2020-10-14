@@ -43,7 +43,7 @@ namespace VatsimLibrary.VatsimData
         public static readonly string VATSIM_SERVERS_PREFIX;
         public static readonly string VATSIM_METAR_PREFIX;
 
-        public static VatsimData CurrentVatsimData {get; set;}
+        public static VatsimDataState CurrentVatsimData {get; set;}
 
         //static constructor
         // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-constructors    
@@ -59,7 +59,7 @@ namespace VatsimLibrary.VatsimData
             VATSIM_SERVERS_PREFIX = "url1";            
             VATSIM_METAR_PREFIX = "metar0";
 
-            CurrentVatsimData = new VatsimData();
+            CurrentVatsimData = new VatsimDataState();
 
         }
 
@@ -94,9 +94,9 @@ namespace VatsimLibrary.VatsimData
                 }
             }
 
-            Console.WriteLine($"data url: {CurrentVatsimData.VatsimDataUrl}");
-            Console.WriteLine($"servers url: {CurrentVatsimData.VatsimServersUrl}");
-            Console.WriteLine($"metar url: {CurrentVatsimData.VatsimMetarUrl}"); 
+            // Console.WriteLine($"data url: {CurrentVatsimData.VatsimDataUrl}");
+            // Console.WriteLine($"servers url: {CurrentVatsimData.VatsimServersUrl}");
+            // Console.WriteLine($"metar url: {CurrentVatsimData.VatsimMetarUrl}"); 
 
         }        
 
@@ -175,18 +175,7 @@ namespace VatsimLibrary.VatsimData
                 if(line.StartsWith("UPDATE"))
                 {
                     string update_value = line.Split('=')[1].Trim();
-                    int year = Convert.ToInt32(update_value.Substring(0,4));
-                    Console.WriteLine($"year: {year}");
-                    int month = Convert.ToInt32(update_value.Substring(4,2));
-                    Console.WriteLine($"month: {month}");
-                    int day = Convert.ToInt32(update_value.Substring(6,2));
-                    Console.WriteLine($"day: {day}");
-                    int hour = Convert.ToInt32(update_value.Substring(8,2));
-                    Console.WriteLine($"hour: {hour}");
-                    int minute = Convert.ToInt32(update_value.Substring(10,2));
-                    Console.WriteLine($"minute: {minute}");
-                    int second = Convert.ToInt32(update_value.Substring(12,2));
-                    Console.WriteLine($"second: {second}");
+                    CurrentVatsimData.VatsimDataLastUpdated = VatsimDataState.GetDateTimeFromVatsimTimeStamp(update_value);
                 }
                 if(line.StartsWith("CONNECTED CLIENTS"))
                 {
@@ -230,7 +219,7 @@ namespace VatsimLibrary.VatsimData
             //remove all records
             CurrentVatsimData.VatsimClientRecords.Clear();
 
-            Console.WriteLine($"Length: {CurrentVatsimData.VatsimClientRecords.Count}");
+            // Console.WriteLine($"Length: {CurrentVatsimData.VatsimClientRecords.Count}");
 
             //get urls
             await GetVatsimURLS();
@@ -243,7 +232,7 @@ namespace VatsimLibrary.VatsimData
             if(data_result)
             {
                 GetVatsimClientRecordsFromLocalFile(VATSIM_LOCAL_DATA_FILE);
-                Console.WriteLine($"{CurrentVatsimData.VatsimClientRecords.Count} records were created");
+                Console.WriteLine($"{CurrentVatsimData.VatsimClientRecords.Count} client records were created");
                 // Console.WriteLine($"first:\n{CurrentVatsimData.VatsimClientRecords[0]}");
                 // Console.WriteLine($"last:\n{CurrentVatsimData.VatsimClientRecords[CurrentVatsimData.VatsimClientRecords.Count - 1]}");
             }

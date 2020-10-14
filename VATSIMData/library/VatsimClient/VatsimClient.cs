@@ -48,8 +48,9 @@ namespace VatsimLibrary.VatsimClient
         QNH_iHg:29.94:
         QNH_Mb:1014:
         */
+
+        public string Cid { get; set; }        
         public string Callsign { get; set; }
-        public string Cid { get; set; }
         public string Realname { get; set; }
         public string Clienttype { get; set; }
         public string Latitude { get; set; }

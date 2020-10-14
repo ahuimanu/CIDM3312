@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 
 using VatsimLibrary.VatsimClient;
+using VatsimLibrary.VatsimDb;
 
 namespace VatsimLibrary.VatsimData
 {
-    public class VatsimData
+    public class VatsimDataState
     {
 
         private const bool IFRONLY = true;
@@ -28,6 +29,20 @@ namespace VatsimLibrary.VatsimData
         public string VatsimDataConnectedClients {get; set;}
         public string VatsimDataUniqueUsers {get; set;}
 
+        public static DateTime GetDateTimeFromVatsimTimeStamp(string vatsimtimestamp)
+        {
+
+            int year = Convert.ToInt32(vatsimtimestamp.Substring(0,4));
+            int month = Convert.ToInt32(vatsimtimestamp.Substring(4,2));
+            int day = Convert.ToInt32(vatsimtimestamp.Substring(6,2));
+            int hour = Convert.ToInt32(vatsimtimestamp.Substring(8,2));
+            int minute = Convert.ToInt32(vatsimtimestamp.Substring(10,2));
+            int second = Convert.ToInt32(vatsimtimestamp.Substring(12,2));
+            
+            return new DateTime(year, month, day, hour, minute, second);
+
+        }        
+
         /// <summary>
         /// Run through the list of clients to parse out ATC and Pilots
         /// </summary>
@@ -45,7 +60,6 @@ namespace VatsimLibrary.VatsimData
                             break;
 
                         case "PILOT":
-
                             // only process IFR flights
                             if(IFRONLY)
                             {
@@ -88,6 +102,7 @@ namespace VatsimLibrary.VatsimData
             // the pilot exists in the list
             if(pilot != null)
             {
+                Console.WriteLine($"pilot from db: {pilot.Cid}");                   
                 pilot.ProcessVatsimClientPlannedFlight(record);
                 pilot.ProcessVatsimClientPilotSnapshot(record);
             }
@@ -95,7 +110,10 @@ namespace VatsimLibrary.VatsimData
             else
             {
                 pilot = record.GetVatsimClientPilotFromRecord();
+                pilot.ProcessVatsimClientPlannedFlight(record);
+                pilot.ProcessVatsimClientPilotSnapshot(record);                
                 VatsimClientPilots.Add(pilot);
+                VatsimDbHepler.UpdateOrCreatePilot(pilot);
             }
         }
 
@@ -114,12 +132,8 @@ namespace VatsimLibrary.VatsimData
             {
                 atc = record.GetVatsimClientATCFromRecord();
                 VatsimClientATCs.Add(atc);
+                VatsimDbHepler.UpdateOrCreateATC(atc);
             }
-        }
-
-        public DateTime GetDateTimeFromVatsimTimeStamp(string vatsimtimestamp)
-        {
-            return new DateTime();
         }
     }
 }            
