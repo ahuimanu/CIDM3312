@@ -4,6 +4,8 @@ using System.Threading;
 
 namespace VatsimLibrary.VatsimUtils
 {
+
+    /* credit: https://github.com/erossini/ProgressBarForConsoleApplications */
     public class ConsoleProgressBar : IDisposable, IProgress<double>
     {
 
