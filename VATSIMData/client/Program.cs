@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using VatsimLibrary.VatsimClient;
 using VatsimLibrary.VatsimData;
+using VatsimLibrary.VatsimUtils;
 
 namespace client
 {
@@ -11,7 +13,7 @@ namespace client
         {
             Console.WriteLine("VATSIM Library");
             await VatsimDataReader.ProcessVatsimData();
-            // VatsimDataHarvester.Run();            
+            // VatsimDataHarvester.Run();
             VatsimDataReader.CurrentVatsimData.ProcessVatsimClientRecords();
             Console.WriteLine($"IFR Pilots with Flight Plans: {VatsimDataReader.CurrentVatsimData.VatsimClientPilots.Count}");
             Console.WriteLine($"ATC: {VatsimDataReader.CurrentVatsimData.VatsimClientATCs.Count}");

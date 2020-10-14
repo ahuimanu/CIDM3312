@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 using VatsimLibrary.VatsimClient;
 using VatsimLibrary.VatsimDb;
+using VatsimLibrary.VatsimUtils;
 
 namespace VatsimLibrary.VatsimData
 {
@@ -51,27 +54,40 @@ namespace VatsimLibrary.VatsimData
             // are there any clients to process?
             if(VatsimClientRecords != null && VatsimClientRecords.Count > 0)
             {
+                // get total count
+                int count = 0;
+                int total = VatsimClientRecords.Count;
                 foreach (VatsimClientRecord record in VatsimClientRecords)
                 {
-                    switch(record.Clienttype)
+                    // progress bar
+                    using(var progress = new ConsoleProgressBar())
                     {
-                        case "ATC":
-                            UpdateVatsimClientATCs(record);
-                            break;
 
-                        case "PILOT":
-                            // only process IFR flights
-                            if(IFRONLY)
-                            {
-                                // check to see that this pilot has an IFR Plan Active
-                                if(IFRFlightPlanActive(record))
+                        progress.Report((double)count++ / total);
+                        Thread.Sleep(20);
+
+                        switch(record.Clienttype)
+                        {
+                            case "ATC":
+                                UpdateVatsimClientATCs(record);
+                                break;
+
+                            case "PILOT":
+                                // only process IFR flights
+                                if(IFRONLY)
                                 {
-                                    UpdateVatsimClientPilots(record);
+                                    // check to see that this pilot has an IFR Plan Active
+                                    if(IFRFlightPlanActive(record))
+                                    {
+                                        UpdateVatsimClientPilots(record);
+                                    }
                                 }
-                            }
-                            break;
+                                break;
+                        }
+
                     }
                 }
+                Console.WriteLine("Done.");                
             }            
         }
 

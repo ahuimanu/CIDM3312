@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 using VatsimLibrary.VatsimClient;
 using VatsimLibrary.VatsimData;
@@ -14,7 +15,6 @@ namespace VatsimLibrary.VatsimDb
 
             using(var db = new VatsimDbContext())
             {
-
                 var _controller = db.Controllers.Find(controller.Cid, controller.Callsign, controller.TimeLogon);
 
                 // didn't find the pilot

@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
+
+using VatsimLibrary.VatsimUtils;
 
 // reference on HttpClient: http://zetcode.com/csharp/httpclient/
 namespace VatsimLibrary.VatsimData
@@ -114,8 +117,6 @@ namespace VatsimLibrary.VatsimData
                 // get clients
                 GetVatsimClientRecordsFromLines(lines);
 
-                // GetPilotsFromVatsimClientRecords();
-
                 // metadata
                 GetVatsimDataMetaDataFromLines(lines);
 
@@ -131,26 +132,37 @@ namespace VatsimLibrary.VatsimData
 
             bool client_section = false;
 
-            foreach(string line in lines)
+            Console.Write("Processing Vatsim Client Records from File... ");
+            using (var progress = new ConsoleProgressBar())
             {
-                if(!IgnoreThisLine(line))
+                int count = 0;
+                int total = lines.Length;
+                foreach(string line in lines)
                 {
-                    if(line.StartsWith("!CLIENTS:"))
+                    if(!IgnoreThisLine(line))
                     {
-                        client_section = true;
-                        continue;
-                    } 
-                    if(line.StartsWith("!SERVERS:") || line.StartsWith("!PREFILE:"))
-                    {
-                        client_section = false;
-                        return;
+                        
+                        progress.Report((double)count++ / total);
+                        Thread.Sleep(20);
+
+                        if(line.StartsWith("!CLIENTS:"))
+                        {
+                            client_section = true;
+                            continue;
+                        } 
+                        if(line.StartsWith("!SERVERS:") || line.StartsWith("!PREFILE:"))
+                        {
+                            client_section = false;
+                            return;
+                        }
+                        if(client_section)
+                        {
+                            CurrentVatsimData.VatsimClientRecords.Add(VatsimClientRecord.GetVatsimClientRecord(line));              
+                        }
                     }
-                    if(client_section)
-                    {
-                        CurrentVatsimData.VatsimClientRecords.Add(VatsimClientRecord.GetVatsimClientRecord(line));              
-                    }
-                }
-            }            
+                }    
+            }
+            Console.WriteLine("Done.");
         }        
 
         /// <summary>
