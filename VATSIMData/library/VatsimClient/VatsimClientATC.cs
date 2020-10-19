@@ -32,5 +32,10 @@ namespace VatsimLibrary.VatsimClient
             this.Visualrange = controller.Visualrange;
         }
 
+        public override string ToString()
+        {
+            return $"{this.Cid} - {this.Callsign} - {this.Facilitytype} - {this.Frequency}";
+        }
+
     }
 }

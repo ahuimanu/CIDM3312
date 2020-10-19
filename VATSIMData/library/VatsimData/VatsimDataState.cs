@@ -17,12 +17,6 @@ namespace VatsimLibrary.VatsimData
         // List of Vatsim Client Records
         public List<VatsimClientRecord> VatsimClientRecords {get; set; } = new List<VatsimClientRecord>();
 
-        // List of Vatsim Pilots
-        public List<VatsimClientPilot> VatsimClientPilots { get; set; } = new List<VatsimClientPilot>();
-
-        // List of Vatsim ATC
-        public List<VatsimClientATC> VatsimClientATCs { get; set; } = new List<VatsimClientATC>();
-
         public string VatsimDataUrl {get; set;}
         public string VatsimServersUrl {get; set;}
         public string VatsimMetarUrl {get; set;}
@@ -54,22 +48,22 @@ namespace VatsimLibrary.VatsimData
             // are there any clients to process?
             if(VatsimClientRecords != null && VatsimClientRecords.Count > 0)
             {
-                // get total count
-                int count = 0;
-                int total = VatsimClientRecords.Count;
-                foreach (VatsimClientRecord record in VatsimClientRecords)
-                {
-                    // progress bar
-                    using(var progress = new ConsoleProgressBar())
+                Console.Write("Writing Vatsim Objects to Database... ");
+                // progress bar
+                using(var progress = new ConsoleProgressBar())
+                {                
+                    // get total count
+                    int count = 0;
+                    int total = VatsimClientRecords.Count;
+                    foreach (VatsimClientRecord record in VatsimClientRecords)
                     {
-
                         progress.Report((double)count++ / total);
                         Thread.Sleep(20);
 
                         switch(record.Clienttype)
                         {
                             case "ATC":
-                                UpdateVatsimClientATCs(record);
+                                VatsimDbHepler.UpdateOrCreateATC(record.GetVatsimClientATCFromRecord());
                                 break;
 
                             case "PILOT":
@@ -79,14 +73,16 @@ namespace VatsimLibrary.VatsimData
                                     // check to see that this pilot has an IFR Plan Active
                                     if(IFRFlightPlanActive(record))
                                     {
-                                        UpdateVatsimClientPilots(record);
+                                        VatsimDbHepler.UpdateOrCreatePilot(record.GetVatsimClientPilotFromRecord());
+                                        VatsimDbHepler.UpdateOrCreateFlight(record.GetVatsimClientPlannedFlightFromRecord());
+                                        VatsimDbHepler.CreatePosition(record.GetVatsimClientPilotSnapshotFromRecord());
                                     }
                                 }
                                 break;
                         }
-
                     }
                 }
+
                 Console.WriteLine("Done.");                
             }            
         }
@@ -104,51 +100,6 @@ namespace VatsimLibrary.VatsimData
             else
             {
                 return false;
-            }
-        }
-
-        /// <summary>
-        /// Determine if a pilot is new or has updated
-        /// </summary>
-        public void UpdateVatsimClientPilots(VatsimClientRecord record)
-        {
-
-            VatsimClientPilot pilot = VatsimClientPilots.Find(p => p.Cid == record.Cid);
-
-            // the pilot exists in the list
-            if(pilot != null)
-            {
-                Console.WriteLine($"pilot from db: {pilot.Cid}");                   
-                pilot.ProcessVatsimClientPlannedFlight(record);
-                pilot.ProcessVatsimClientPilotSnapshot(record);
-            }
-            // pilot not found and assumed to be new
-            else
-            {
-                pilot = record.GetVatsimClientPilotFromRecord();
-                pilot.ProcessVatsimClientPlannedFlight(record);
-                pilot.ProcessVatsimClientPilotSnapshot(record);                
-                VatsimClientPilots.Add(pilot);
-                VatsimDbHepler.UpdateOrCreatePilot(pilot);
-            }
-        }
-
-        /// <summary>
-        /// Determine if an ATC is new or has updated
-        /// </summary>
-        /// <param name="record">Raw VatsimClientRecord</param>
-        public void UpdateVatsimClientATCs(VatsimClientRecord record)
-        {
-            VatsimClientATC atc = VatsimClientATCs.Find(a => a.Cid == record.Cid);
-
-            // the atc exists in the list
-            // TODO: since an additional ATIS logon is allowed, adjust code to allow for this
-            // atc not found and assumed to be new                        
-            if(atc == null)
-            {
-                atc = record.GetVatsimClientATCFromRecord();
-                VatsimClientATCs.Add(atc);
-                VatsimDbHepler.UpdateOrCreateATC(atc);
             }
         }
     }

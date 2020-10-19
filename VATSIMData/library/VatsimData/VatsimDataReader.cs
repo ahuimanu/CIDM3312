@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Serilog;
+
 using VatsimLibrary.VatsimUtils;
 
 // reference on HttpClient: http://zetcode.com/csharp/httpclient/
@@ -244,9 +246,9 @@ namespace VatsimLibrary.VatsimData
             if(data_result)
             {
                 GetVatsimClientRecordsFromLocalFile(VATSIM_LOCAL_DATA_FILE);
-                Console.WriteLine($"{CurrentVatsimData.VatsimClientRecords.Count} client records were created");
-                // Console.WriteLine($"first:\n{CurrentVatsimData.VatsimClientRecords[0]}");
-                // Console.WriteLine($"last:\n{CurrentVatsimData.VatsimClientRecords[CurrentVatsimData.VatsimClientRecords.Count - 1]}");
+                string message = $"{CurrentVatsimData.VatsimClientRecords.Count} client records were created";
+                Log.Information(message);
+                Console.WriteLine(message);
             }
 
             //read servers            
@@ -255,7 +257,7 @@ namespace VatsimLibrary.VatsimData
 
             if(server_result)
             {
-
+                // TODO process vatsim servers file
             }
         }
 

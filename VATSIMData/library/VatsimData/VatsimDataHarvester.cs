@@ -1,7 +1,11 @@
 using System;
-using System.Timers;
+using System.Threading;
+using System.Threading.Tasks;
 
 using VatsimLibrary.VatsimClient;
+using VatsimLibrary.VatsimDb;
+using VatsimLibrary.VatsimUtils;
+
 
 namespace VatsimLibrary.VatsimData
 {
@@ -11,34 +15,54 @@ namespace VatsimLibrary.VatsimData
     public class VatsimDataHarvester
     {
 
-        private const int INTERVAL = 2 * 1000;
-        private static Timer clock { get; set; }
+        private const int INTERVAL = 120 * 1000;
+        private static System.Timers.Timer clock { get; set; }
 
-        public static void Run()
+        public static async void Run(DateTime stop)
         {
 
             SetTimer();
-
-            Console.WriteLine("\nPress the Enter key to exit the application...\n");
+            DoHarvest();
+            // Console.WriteLine("\nPress the Enter key to exit the application...\n");
             Console.WriteLine($"The application started at {DateTime.Now:HH:mm:ss.fff}");
-            Console.ReadLine();
+            // Console.ReadLine();
+            while(DateTime.Now <= stop)
+            {
+                Thread.Sleep(1000);
+            }            
             clock.Stop();
             clock.Dispose();
-            
             Console.WriteLine("Terminating the application...");}
 
         private static void SetTimer()
         {
-            clock = new Timer(INTERVAL);
+            clock = new System.Timers.Timer(INTERVAL);
             clock.Elapsed += HarvestData;
             clock.AutoReset = true;
-            clock.Enabled = true;            
+            clock.Start();
+            //clock.Enabled = true;
         }
 
-        private static void HarvestData(Object source, ElapsedEventArgs eea)
+        public static async void DoHarvest()
+        {
+            Console.WriteLine($"Starting: {DateTime.UtcNow.ToLongTimeString()}");
+
+            await VatsimDataReader.ProcessVatsimData();
+            VatsimDataReader.CurrentVatsimData.ProcessVatsimClientRecords();
+            
+            Console.WriteLine($"Completed: {DateTime.UtcNow.ToLongTimeString()}");
+        }
+
+        private static async void HarvestData(Object source, System.Timers.ElapsedEventArgs eea)
         {
             Console.WriteLine($"triggered at: {eea.SignalTime:HH:mm:ss.fff}");
-        }
 
+            Console.WriteLine($"Starting: {DateTime.UtcNow.ToLongTimeString()}");
+
+            await VatsimDataReader.ProcessVatsimData();
+            VatsimDataReader.CurrentVatsimData.ProcessVatsimClientRecords();
+            
+            Console.WriteLine($"Completed: {DateTime.UtcNow.ToLongTimeString()}");            
+        }
     }
 }

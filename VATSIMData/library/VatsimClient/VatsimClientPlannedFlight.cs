@@ -59,5 +59,9 @@ namespace VatsimLibrary.VatsimClient
             this.TimeLogon = flight.TimeLogon;
         }
 
+        public override string ToString()
+        {
+            return $"{this.Cid} - {this.Callsign} - {this.PlannedDepairport} - {this.PlannedDestairport}";
+        }
     }
 }
