@@ -17,13 +17,15 @@ namespace VatsimLibrary.VatsimDb
     public class VatsimDbContext : DbContext
     {
 
+        private string dbfile = $@"{VatsimDbHepler.DATA_DIR}\vatsim.db";
+
         public DbSet<VatsimClientPilot> Pilots { get; set; }
         public DbSet<VatsimClientPlannedFlight> Flights { get; set; }
         public DbSet<VatsimClientPilotSnapshot> Positions { get; set; }
         public DbSet<VatsimClientATC> Controllers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite("Data Source=vatsim.db");
+            => options.UseSqlite($@"Data Source={dbfile}");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

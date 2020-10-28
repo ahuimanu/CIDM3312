@@ -18,7 +18,7 @@ namespace VatsimLibrary.VatsimData
         private const int INTERVAL = 120 * 1000;
         private static System.Timers.Timer clock { get; set; }
 
-        public static async void Run(DateTime stop)
+        public static void Run(DateTime stop)
         {
 
             SetTimer();
@@ -32,7 +32,8 @@ namespace VatsimLibrary.VatsimData
             }            
             clock.Stop();
             clock.Dispose();
-            Console.WriteLine("Terminating the application...");}
+            Console.WriteLine("Terminating the application...");
+        }
 
         private static void SetTimer()
         {
@@ -53,16 +54,11 @@ namespace VatsimLibrary.VatsimData
             Console.WriteLine($"Completed: {DateTime.UtcNow.ToLongTimeString()}");
         }
 
-        private static async void HarvestData(Object source, System.Timers.ElapsedEventArgs eea)
+        private static void HarvestData(Object source, System.Timers.ElapsedEventArgs eea)
         {
             Console.WriteLine($"triggered at: {eea.SignalTime:HH:mm:ss.fff}");
+            DoHarvest();
 
-            Console.WriteLine($"Starting: {DateTime.UtcNow.ToLongTimeString()}");
-
-            await VatsimDataReader.ProcessVatsimData();
-            VatsimDataReader.CurrentVatsimData.ProcessVatsimClientRecords();
-            
-            Console.WriteLine($"Completed: {DateTime.UtcNow.ToLongTimeString()}");            
         }
     }
 }

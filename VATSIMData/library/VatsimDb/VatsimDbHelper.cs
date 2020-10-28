@@ -13,11 +13,21 @@ namespace VatsimLibrary.VatsimDb
 {
     public class VatsimDbHepler
     {
+
+        public static readonly string DATA_DIR;
+
+        static VatsimDbHepler()
+        {
+            DirectoryInfo data_dir = new DirectoryInfo(Environment.CurrentDirectory);
+            DATA_DIR = $@"{data_dir.Parent}\data\";
+        }
+
         public static async void UpdateOrCreateATC(VatsimClientATC controller)
         {
 
             using(var db = new VatsimDbContext())
             {
+
                 var _controller = await db.Controllers.FindAsync(controller.Cid, controller.Callsign, controller.TimeLogon);
 
                 // didn't find the pilot
