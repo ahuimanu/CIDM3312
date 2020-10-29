@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 using VatsimLibrary.VatsimClient;
+using VatsimLibrary.VatsimData;
 
 /**
  * The Entity Framework Core tutorial is helpful here: 
@@ -17,12 +18,18 @@ namespace VatsimLibrary.VatsimDb
     public class VatsimDbContext : DbContext
     {
 
-        private string dbfile = $@"{VatsimDbHepler.DATA_DIR}\vatsim.db";
+        private string dbfile;
 
         public DbSet<VatsimClientPilot> Pilots { get; set; }
         public DbSet<VatsimClientPlannedFlight> Flights { get; set; }
         public DbSet<VatsimClientPilotSnapshot> Positions { get; set; }
         public DbSet<VatsimClientATC> Controllers { get; set; }
+
+        public VatsimDbContext()
+        {
+            VatsimDataReader.EnsureDataDirectoryExists(VatsimDbHepler.DATA_DIR);
+            this.dbfile = $@"{VatsimDbHepler.DATA_DIR}\vatsim.db";
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite($@"Data Source={dbfile}");

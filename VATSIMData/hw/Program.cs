@@ -38,7 +38,17 @@ namespace hw
                     Console.WriteLine($"Pilot found: {_pilot.Realname}");
                 } else {
                     Console.WriteLine("Pilot not found");
-                }                                
+                }
+
+                //1484591
+                //PAL922
+                //20201028132105
+                _pilot = db.Pilots.Find("1484591", "PAL922", "20201028132105");
+                if(_pilot != null){
+                    Console.WriteLine($"Pilot found: {_pilot.Realname}");
+                } else {
+                    Console.WriteLine("Pilot not found");
+                }                
             }            
         }
     }

@@ -68,11 +68,11 @@ namespace VatsimLibrary.VatsimData
 
         }
 
-        private static void EnsureDataDirectoryExists()
+        public static void EnsureDataDirectoryExists(string dir)
         {
-            if(!Directory.Exists(VATSIM_LOCAL_DATA_DIRECTORY))
+            if(!Directory.Exists(dir))
             {
-                Directory.CreateDirectory(VATSIM_LOCAL_DATA_DIRECTORY);
+                Directory.CreateDirectory(dir);
             }
         }
 
@@ -239,7 +239,7 @@ namespace VatsimLibrary.VatsimData
             await GetVatsimURLS();
 
             //read clients
-            EnsureDataDirectoryExists();
+            EnsureDataDirectoryExists(VATSIM_LOCAL_DATA_DIRECTORY);
             var data_result = await WriteVatsimDataToFileAsync(CurrentVatsimData.VatsimDataUrl, 
                                                                VATSIM_LOCAL_DATA_FILE);
 
