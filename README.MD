@@ -62,3 +62,49 @@ dotnet sln Platform add Platform
 #### Custom Middleware to Understand the Request System
 
 Freeman has us create some custom middleware to simply understand how Microsoft's built-in services contribute to the request/response pipeline.
+
+* we can do one-off method based middleware
+* or, reusable class-based middle ware
+
+Generally, all middle ware takes the request object and provides additoinal material on the way back out as a response.
+
+![Requests and Responses in the ASP.NET Core Middleware Pipline](https://i.imgur.com/572gxiU.png)
+
+The pipeline only continues if the `next()` method is called.  If it is not, then the Request / Response cycle is ***short-cicruited***.
+
+#### Configuring Middleware
+
+We configure our middleware with the so-called ***options pattern***.
+
+We can do so by defining a class:
+
+``` cs
+namespace Platform 
+{ 
+    public class MessageOptions 
+    { 
+        public string CityName { get; set; } = "New York"; 
+        public string CountryName { get; set; } = "USA"; 
+    } 
+}
+```
+
+The first chapter in the ASP.NET Core Platform is indeed strange, but it sets an important foundation for how ASP.NET Core works with the web.
+
+### Chapter 13 URL Routing
+
+Routing is at the heart of a web application framework as it is a vital aspect of the Input => Processing => Output value chain of applications.
+
+We previously discussed the Request and Response chain and middleware, routing is the means by which those "chains" are matched with incoming requests.
+
+Freeman describes it thusly:
+
+>URL routing consolidates the processing and matching of URLs, allowing components known as endpoints to generate responses.
+
+Freeman populates a brief data object to illustrate how we can provided different data responses depending on route matching.
+
+We learn that, although we can do it manually, we want to use Routing middleware to define endpoints:
+
+*An **endpoint** is the match of a distinct route string in the URL.*
+
+![URL Anatomy](https://i.imgur.com/ycyiHJO.png)
