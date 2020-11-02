@@ -26,8 +26,30 @@ namespace Platform
                 app.UseDeveloperExceptionPage();
             }
 
-            /* custom middleware */
-            
+            /*  __custom middleware__
+                context - envelops the request
+                next - the next stop in the middleware/request chain
+
+                we use a simple lamdba method out of convenience, but it is not very reusbale
+            */
+            app.Use(
+                async(context, next) => {
+                    //we can interrogate the Request object to learn more about what is being asked of the server
+                    if(context.Request.Method == HttpMethods.Get && context.Request.Query["custom"] == "yes")
+                    {
+                        await context.Response.WriteAsync("This is my custom middleware\n");
+                    }
+                    await next();
+                }
+            );
+
+            /*  __class-based custom middleware__
+                With a class-based middleware, we have something that is reusable
+
+                The use of Generic typing helps here.
+
+            */
+            app.UseMiddleware<QueryStringMiddleWare>();
 
             app.UseRouting();
 
