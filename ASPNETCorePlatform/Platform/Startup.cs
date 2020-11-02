@@ -112,8 +112,21 @@ namespace Platform
                     await context.Response.WriteAsync("Request was Routed");
                 });
 
-                endpoints.MapGet("capitol/uk", new Capitol().Invoke);
-                endpoints.MapGet("population/paris", new Population().Invoke);
+                endpoints.MapGet(
+                    "{first}/{second}/{third}",
+                    async context => {
+                        await context.Response.WriteAsync("Request was Routed\n");
+                        foreach(var kvp in context.Request.RouteValues)
+                        {
+                            await context.Response.WriteAsync($"{kvp.Key}:{kvp.Value}\n");
+                        }
+                    }
+                );
+
+                // endpoints.MapGet("capitol/uk", new Capitol().Invoke);
+                // endpoints.MapGet("population/paris", new Population().Invoke);
+                endpoints.MapGet("capital/{country}", Capitol.EndPoint);
+                endpoints.MapGet("population/{city}", Population.Endpoint);
 
             });
 

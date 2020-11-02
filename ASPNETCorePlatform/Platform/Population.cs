@@ -6,47 +6,77 @@ namespace Platform
 {
     public class Population
     {
-        private RequestDelegate next;
+        // private RequestDelegate next;
 
-        public Population(){}
+        // public Population(){}
 
-        public Population(RequestDelegate nextDelegate)
+        // public Population(RequestDelegate nextDelegate)
+        // {
+        //     next = nextDelegate;
+        // }
+
+        // public async Task Invoke(HttpContext context)
+        // {
+        //     //take the incoming path and break it up by directory separators
+        //     string[] parts = context.Request.Path.ToString().Split("/", StringSplitOptions.RemoveEmptyEntries);
+
+        //     if(parts.Length == 2 && parts[0] == "population")
+        //     {
+        //         string city = parts[1];
+        //         int? population = null;
+        //         switch(city.ToLower())
+        //         {
+        //             case "london":
+        //                 population = 8_136_000;
+        //                 break;
+
+        //             case "paris":
+        //                 population = 2_141_000;
+        //                 break;
+        //             case "monaco":
+        //                 population = 39_000;
+        //                 break;
+        //         }
+
+        //         if(population.HasValue)
+        //         {
+        //             await context.Response.WriteAsync($"City: {city}, Population: {population}");
+        //         }
+        //     }
+
+        //     if(next != null)
+        //     {
+        //         await next(context);
+        //     }
+        // }
+
+        public static async Task Endpoint(HttpContext context)
         {
-            next = nextDelegate;
-        }
+            string city = context.Request.RouteValues["city"] as string;
 
-        public async Task Invoke(HttpContext context)
-        {
-            //take the incoming path and break it up by directory separators
-            string[] parts = context.Request.Path.ToString().Split("/", StringSplitOptions.RemoveEmptyEntries);
+            int? population = null;
 
-            if(parts.Length == 2 && parts[0] == "population")
+            switch((city ?? "").ToLower())
             {
-                string city = parts[1];
-                int? population = null;
-                switch(city.ToLower())
-                {
-                    case "london":
-                        population = 8_136_000;
-                        break;
+                case "london":
+                    population = 8_136_000;
+                    break;
 
-                    case "paris":
-                        population = 2_141_000;
-                        break;
-                    case "monaco":
-                        population = 39_000;
-                        break;
-                }
-
-                if(population.HasValue)
-                {
-                    await context.Response.WriteAsync($"City: {city}, Population: {population}");
-                }
+                case "paris":
+                    population = 2_141_000;
+                    break;
+                case "monaco":
+                    population = 39_000;
+                    break;
             }
 
-            if(next != null)
+            if(population.HasValue)
             {
-                await next(context);
+                await context.Response.WriteAsync($"City: {city}, Population: {population}");
+            }
+            else
+            {
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
             }
         }
     }
