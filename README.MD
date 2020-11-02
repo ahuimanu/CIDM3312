@@ -38,3 +38,27 @@ ASP.NET Core Platform Basics:
 
 ![ASPNETCORE Services and Pipeline](https://i.imgur.com/FsO9yKk.png)
 
+#### Understanding Basic ASP.NET Core Projects
+
+Most ASP.NET Core projects contain a few of the same types of files:
+
+* `Program.cs` contains the entry point (`public static void main`)
+    * This creates a host builder so that ASP.NET Core processes can run
+    * We often use the default builder
+    * We also specify which source file should be called to kick the party off
+* `Startup.cs` contains the `Startup` class
+* `.csproj` file contains directives about which dependencies the project has and how it associates with other resources
+
+For illustration:
+
+```
+dotnet new globaljson --sdk-version 3.1.101 --output Platform 
+dotnet new web --no-https --output Platform --framework netcoreapp3.1 
+dotnet new sln -o Platform 
+dotnet sln Platform add Platform
+
+```
+
+#### Custom Middleware to Understand the Request System
+
+Freeman has us create some custom middleware to simply understand how Microsoft's built-in services contribute to the request/response pipeline.
