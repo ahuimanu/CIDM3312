@@ -108,3 +108,57 @@ We learn that, although we can do it manually, we want to use Routing middleware
 *An **endpoint** is the match of a distinct route string in the URL.*
 
 ![URL Anatomy](https://i.imgur.com/ycyiHJO.png)
+
+#### Using Route Segments to Define Variables
+
+The general pattern for a web application is to create routes that are semantically important (have meaning) for the underlying purpose of the application.
+
+We want the routing system to parse route segments as values to use in the application.
+
+#### Managing URL Matching
+
+ASP.NET provides even deeper capabilities to ensure that a given URL can be parsed into the correct route to ensure that requests are handled as you would expect.
+
+Typically however, segment variables correct directly to a segment in the URL path.  However, middleware routing enables more complex handling, should we need it.
+
+##### Default and Optional route segment values
+
+We can also express default values for a route segment:
+
+``` cs
+endpoints.MapGet("capital/{country=France}", Capital.Endpoint);
+```
+
+We can also indicate that a route segment is optional:
+
+``` cs
+endpoints.MapGet("size/{city?}", Population.Endpoint);
+```
+
+Lastly, we can specify a "wildcard" or catch-all
+
+```cs
+endpoints.MapGet("{first}/{second}/{*catchall}", delegate);
+```
+##### Segment Matching Constraints
+
+While default values, optional segments, and catchall segments broadened the range of URL matching, contraints constrict what can be matched.
+
+We commonly constrain segments by data types allowed (e.g. integers, strings, and whatnot).
+
+Here is an example:
+
+``` cs
+endpoints.MapGet("{first:int}/{second:bool}", delegate)
+```
+
+### Chapter 14 Dependency Injection
+
+From Freeman:
+
+>Services are objects that are shared between middleware components and endpoints. There are no restrictions on the features that services can provide, but they are usually used for tasks that are needed in multiple parts of the application, such as logging or database access. The ASP.NET Core dependency injection feature is used to create and consume services. This is a topic that causes confusion and can be difficult to understand. In this chapter, I describe the problems that dependency injection solves and explain how dependency injection is supported by the ASP.NET Core platform.
+
+Further:
+
+> Dependency Injection makes it easy to create loosely coupled components, which typically means that components consume functionality defined by interfaces without having any firsthand knowledge of which implementation classes are being used.
+

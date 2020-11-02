@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -113,7 +114,7 @@ namespace Platform
                 });
 
                 endpoints.MapGet(
-                    "{first}/{second}/{third}",
+                    "{first:int}/{second:bool}/{*catchall}",
                     async context => {
                         await context.Response.WriteAsync("Request was Routed\n");
                         foreach(var kvp in context.Request.RouteValues)
@@ -123,10 +124,21 @@ namespace Platform
                     }
                 );
 
-                // endpoints.MapGet("capitol/uk", new Capitol().Invoke);
-                // endpoints.MapGet("population/paris", new Population().Invoke);
-                endpoints.MapGet("capital/{country}", Capitol.EndPoint);
-                endpoints.MapGet("population/{city}", Population.Endpoint);
+
+                endpoints.MapGet("files/{filename}.{ext}",
+                    async context => {
+                        await context.Response.WriteAsync("Request was routed\n");
+                        foreach(var kvp in context.Request.RouteValues)
+                        {
+                            await context.Response.WriteAsync($"{kvp.Key}:{kvp.Value}\n");
+                        }
+                    }
+                );
+
+                endpoints.MapGet("capital/{country=France}", Capital.EndPoint);
+                // the "with metadata" part assigns a name to the route overall
+                // the question mark in there means that the value/variable is nullable - it can be empty and not crash the program
+                endpoints.MapGet("size/{city?}", Population.Endpoint).WithMetadata(new RouteNameMetadata("population"));
 
             });
 
