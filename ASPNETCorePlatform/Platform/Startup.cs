@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+
+using Platform.Services;
 
 namespace Platform
 {
@@ -17,118 +20,80 @@ namespace Platform
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // so, think of these as the Interface seen in code and the implementation that should be injected
+            services.AddSingleton<IResponseFormatter, HtmlResponseFormatter>();
 
-            // services.Configure<MessageOptions>( options =>
-            //     {
-            //         options.CityName = "Albany";
-            //     }
-            // );            
+            // despite its name, a service is only called upon when DI is resolved at startup
+            services.AddTransient<IResponseFormatter, GuidService>();
+
+            // same object but will change when a new request is made
+            services.AddScoped<IResponseFormatter, GuidService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, 
-                              IWebHostEnvironment env)
-                              //IOptions<MessageOptions> msgOptions)
+                              IWebHostEnvironment env,
+                              IResponseFormatter formatter)
         {
+
+            // in chapter 14, this method is simplified.
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            #region previous middleware examples
-            // use the location middleware class
-            // app.UseMiddleware<LocationMiddleware>();
-
-            // we pass options along as arguments when the services are configured
-            // app.Use(
-            //     async(context, next) => 
-            //     {
-            //         if(context.Request.Path == "/location")
-            //         {
-            //             MessageOptions opts = msgOptions.Value;
-            //             await context.Response.WriteAsync($"{opts.CityName}, {opts.CountryName}");
-            //         }
-            //         else
-            //         {
-            //             await next();
-            //         }
-            //     }
-            // );
-
-            /*  __short circuit__
-                A request/response cycle can be short-circuited
-            */
-            // app.Use(
-            //     async(context, next) => 
-            //     {
-            //         if(context.Request.Path == "/short")
-            //         {
-            //             await context.Response.WriteAsync($"Rquest was short-circuited");
-            //         }
-            //         else
-            //         {
-            //             await next();
-            //         }
-            //     }
-            // );            
-
-            /*  __custom middleware__
-                context - envelops the request
-                next - the next stop in the middleware/request chain
-
-                we use a simple lamdba method out of convenience, but it is not very reusbale
-            */
-            // app.Use(
-            //     async(context, next) => {
-            //         //we can interrogate the Request object to learn more about what is being asked of the server
-            //         if(context.Request.Method == HttpMethods.Get && context.Request.Query["custom"] == "yes")
-            //         {
-            //             await context.Response.WriteAsync("This is my custom middleware\n");
-            //         }
-            //         await next();
-            //     }
-            // );
-
-            /*  __class-based custom middleware__
-                With a class-based middleware, we have something that is reusable
-
-                The use of Generic typing helps here.
-
-            */
-            // app.UseMiddleware<QueryStringMiddleWare>();
-
-            #endregion
-
-            // we can move these to the routing structure as well
-            // app.UseMiddleware<Population>();
-            // app.UseMiddleware<Capitol>();
-
             app.UseRouting();
+            app.UseMiddleware<WeatherMiddleware>();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("routing", async context =>
+            app.Use(
+                async (context, next) =>
                 {
-                    await context.Response.WriteAsync("Request was Routed");
-                });
+                    if(context.Request.Path == "/middleware/function")
+                    {
+                        //await formatter.Format(context, "Middleware Function: It is snowing in Chicago");
+                        // singleton pattern for service use
+                        // await TextResponseFormatter.Singleton
+                        //                            .Format(context, "Middleware Function: It is snowing in Chicago");
 
-                endpoints.MapGet(
-                    "{first}/{second}/{third}",
-                    async context => {
-                        await context.Response.WriteAsync("Request was Routed\n");
-                        foreach(var kvp in context.Request.RouteValues)
-                        {
-                            await context.Response.WriteAsync($"{kvp.Key}:{kvp.Value}\n");
-                        }
+                        //now we use the TypeBroker
+                        // await TypeBroker.Formatter.Format(context, "Middleware Function: It is snowing in Chicago");
+
+                        //and now, Dependency Injection
+                        // IResponseFormatter formatter = app.ApplicationServices.GetService<IResponseFormatter>();
+                        IResponseFormatter formatter = context.RequestServices.GetService<IResponseFormatter>();
+                        await formatter.Format(context, "Middleware Function: It is snowing in Chicago");
                     }
-                );
+                    else
+                    {
+                        await next();
+                    }
+                }
+            );
 
-                // endpoints.MapGet("capitol/uk", new Capitol().Invoke);
-                // endpoints.MapGet("population/paris", new Population().Invoke);
-                endpoints.MapGet("capital/{country}", Capitol.EndPoint);
-                endpoints.MapGet("population/{city}", Population.Endpoint);
+            app.UseEndpoints( endpoints =>
+                {
+                    // endpoints.MapGet("/endpoint/class", WeatherEndpoint.Endpoint);
+                    // endpoints.MapWeather("/endpoint/class");
+                    endpoints.MapEndpoint<WeatherEndpoint>("/endpoint/class");
 
-            });
+                    endpoints.MapGet("/endpoint/function", 
+                        async context => 
+                        {
+                            //await context.Response.WriteAsync("Endpoint Function: It is sunny in LA");
+                            // use singleton
+                            // await TextResponseFormatter.Singleton.Format(context, "Endpoint Function: It is sunny in LA");
+
+                            //now we use the TypeBroker
+                            // await TypeBroker.Formatter.Format(context, "Endpoint Function: It is sunny in LA");
+                            // IResponseFormatter formatter = app.ApplicationServices.GetService<IResponseFormatter>();
+                            IResponseFormatter formatter = context.RequestServices.GetService<IResponseFormatter>();                            
+                            await formatter.Format(context, "Endpoint Function: It is sunny in LA");
+
+                        }
+                    );
+                }
+            );
 
             app.Use(
                 async(context, next) => 
