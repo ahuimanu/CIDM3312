@@ -1,6 +1,6 @@
 ﻿using System;
 
-using VatsimLibrary.VatsimClient;
+using VatsimLibrary.VatsimClientV1;
 
 namespace VatsimLibrary.VatsimData
 {
@@ -457,9 +457,9 @@ namespace VatsimLibrary.VatsimData
             return output;
         }
 
-        public VatsimClientATC GetVatsimClientATCFromRecord()
+        public VatsimClientATCV1 GetVatsimClientATCFromRecord()
         {
-            VatsimClientATC atc = new VatsimClientATC();
+            VatsimClientATCV1 atc = new VatsimClientATCV1();
 
             atc.Callsign = this.Callsign;
             atc.Cid = this.Cid;
@@ -479,9 +479,9 @@ namespace VatsimLibrary.VatsimData
             return atc;
         }
 
-        public VatsimClientPilot GetVatsimClientPilotFromRecord()
+        public VatsimClientPilotV1 GetVatsimClientPilotFromRecord()
         {
-            VatsimClientPilot pilot = new VatsimClientPilot();
+            VatsimClientPilotV1 pilot = new VatsimClientPilotV1();
 
             pilot.Callsign = this.Callsign;
             pilot.Cid = this.Cid;
@@ -497,9 +497,9 @@ namespace VatsimLibrary.VatsimData
             return pilot;
         }
 
-        public VatsimClientPlannedFlight GetVatsimClientPlannedFlightFromRecord()
+        public VatsimClientPlannedFlightV1 GetVatsimClientPlannedFlightFromRecord()
         {
-            VatsimClientPlannedFlight flight = new VatsimClientPlannedFlight();
+            VatsimClientPlannedFlightV1 flight = new VatsimClientPlannedFlightV1();
 
             flight.Callsign = this.Callsign;
             flight.Cid = this.Cid;
@@ -535,9 +535,9 @@ namespace VatsimLibrary.VatsimData
             return flight;
         }
 
-        public VatsimClientPilotSnapshot GetVatsimClientPilotSnapshotFromRecord()
+        public VatsimClientPilotSnapshotV1 GetVatsimClientPilotSnapshotFromRecord()
         {
-            VatsimClientPilotSnapshot position = new VatsimClientPilotSnapshot();
+            VatsimClientPilotSnapshotV1 position = new VatsimClientPilotSnapshotV1();
 
             position.Altitude = this.Altitude;
             position.Callsign = this.Callsign;

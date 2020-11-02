@@ -1,8 +1,8 @@
 using System;
 
-namespace VatsimLibrary.VatsimClient
+namespace VatsimLibrary.VatsimClientV1
 {
-    public class VatsimClientPlannedFlight : VatsimClient
+    public class VatsimClientPlannedFlightV1 : VatsimClientV1
     {
         public string PlannedAircraft { get; set; }
         public string PlannedAltitude { get; set; }        
@@ -25,7 +25,7 @@ namespace VatsimLibrary.VatsimClient
         public string PlannedRoute { get; set; }
         public string PlannedTascruise { get; set; }
 
-        public void Update(VatsimClientPlannedFlight flight)
+        public void Update(VatsimClientPlannedFlightV1 flight)
         {
             this.Cid = flight.Cid;
             this.Callsign = flight.Callsign;

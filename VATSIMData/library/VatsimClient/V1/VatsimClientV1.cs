@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace VatsimLibrary.VatsimClient
+namespace VatsimLibrary.VatsimClientV1
 {
-    public abstract class VatsimClient
+    public abstract class VatsimClientV1
     {
         /* Sample fields and data */
         /*

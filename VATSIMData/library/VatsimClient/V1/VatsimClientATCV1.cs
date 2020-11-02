@@ -2,10 +2,10 @@ using System;
 
 using VatsimLibrary.VatsimData;
 
-namespace VatsimLibrary.VatsimClient
+namespace VatsimLibrary.VatsimClientV1
 {
 
-    public class VatsimClientATC : VatsimClient
+    public class VatsimClientATCV1 : VatsimClientV1
     {
         public string AtisMessage { get; set; }                
         public string Frequency { get; set; }
@@ -13,7 +13,7 @@ namespace VatsimLibrary.VatsimClient
         public string Rating { get; set; }        
         public string Visualrange { get; set; }
 
-        public void Update(VatsimClientATC controller)
+        public void Update(VatsimClientATCV1 controller)
         {
             this.Cid = controller.Cid;
             this.Callsign = controller.Callsign;

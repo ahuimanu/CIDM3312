@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Serilog;
 
-using VatsimLibrary.VatsimClient;
+using VatsimLibrary.VatsimClientV1;
 using VatsimLibrary.VatsimData;
 using VatsimLibrary.VatsimUtils;
 

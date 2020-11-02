@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 using VatsimLibrary.VatsimData;
 
-namespace VatsimLibrary.VatsimClient
+namespace VatsimLibrary.VatsimClientV1
 {
-    public class VatsimClientPilot : VatsimClient
+    public class VatsimClientPilotV1 : VatsimClientV1
     {
-        public void Update(VatsimClientPilot pilot)
+        public void Update(VatsimClientPilotV1 pilot)
         {
             this.Callsign = pilot.Callsign;
             this.Cid = pilot.Cid;

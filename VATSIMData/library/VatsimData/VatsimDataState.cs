@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-using VatsimLibrary.VatsimClient;
+using VatsimLibrary.VatsimClientV1;
 using VatsimLibrary.VatsimDb;
 using VatsimLibrary.VatsimUtils;
 

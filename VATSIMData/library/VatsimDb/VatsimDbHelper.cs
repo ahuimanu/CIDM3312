@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Serilog;
 
-using VatsimLibrary.VatsimClient;
+using VatsimLibrary.VatsimClientV1;
 using VatsimLibrary.VatsimData;
 
 namespace VatsimLibrary.VatsimDb
@@ -22,7 +22,7 @@ namespace VatsimLibrary.VatsimDb
             DATA_DIR = $@"{data_dir.Parent}\data\";
         }
 
-        public static async void UpdateOrCreateATC(VatsimClientATC controller)
+        public static async void UpdateOrCreateATC(VatsimClientATCV1 controller)
         {
 
             using(var db = new VatsimDbContext())
@@ -58,7 +58,7 @@ namespace VatsimLibrary.VatsimDb
             }
         }
 
-        public static async void UpdateOrCreatePilot(VatsimClientPilot pilot)
+        public static async void UpdateOrCreatePilot(VatsimClientPilotV1 pilot)
         {
 
             using(var db = new VatsimDbContext())
@@ -94,7 +94,7 @@ namespace VatsimLibrary.VatsimDb
             }
         }
 
-        public static async void UpdateOrCreateFlight(VatsimClientPlannedFlight flight)
+        public static async void UpdateOrCreateFlight(VatsimClientPlannedFlightV1 flight)
         {
 
             using(var db = new VatsimDbContext())
@@ -139,7 +139,7 @@ namespace VatsimLibrary.VatsimDb
         /// Save a position to the database
         /// </summary>
         /// <param name="position">position snapshot information</param>
-        public static void CreatePosition(VatsimClientPilotSnapshot position)
+        public static void CreatePosition(VatsimClientPilotSnapshotV1 position)
         {
 
             using(var db = new VatsimDbContext())
