@@ -106,6 +106,7 @@ I will follow this up with an orientation video soon, but I wanted to get you st
 
 Part II of Freeman's book discusses some of the basic mechanics of how an HTTP Request and Response work within ASP.NET.
 
+I create Request/Response Endpoints similar to chapters 12-14.
 
 # Using ASP.NET MVC/RazorPages to Work with this data
 
