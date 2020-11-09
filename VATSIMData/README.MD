@@ -14,6 +14,14 @@ The lirbary reads from a text file on the Internet/WWW every two minutes and wri
 
 We will query for airports or aircraft to find flights where we can then view some basic data about those flights.
 
+## HW
+
+A brief demonstration of the first homework assignment that used this project.
+
+## API
+
+HTTP endpoints are provided to provide text output for various queries.  A precursor to a proper REST api.
+
 ## Entity Framework Core
 
 Follow the steps in this tutorial carefully: [Getting Started with EF Core](https://docs.microsoft.com/en-us/ef/core/get-started/?tabs=netcore-cli)
