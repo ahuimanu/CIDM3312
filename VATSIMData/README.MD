@@ -22,6 +22,19 @@ A brief demonstration of the first homework assignment that used this project.
 
 HTTP endpoints are provided to provide text output for various queries.  A precursor to a proper REST api.
 
+# How to Run
+
+1. You always want to run the `client` app a few times to get some data into the database or update the database.
+    1. If this is your first time running the application, you must first run `dotnet ef database update` from within the `library` project
+    2. Because the client program and library are separated, you must specify a startup project: `dotnet ef database update --startup-project ..\client\client.csproj`
+2. Once the database is taken care of, you can run the client like this: `dotnet run {number_of_minutes}`
+    1. that `{number_of_minutes}` indicates that you should pass the total number of minutes you'd like client to run (not to exceed 10)
+    2. Here is how you'd call it: `dotnet run 5` for 5 minutes
+    3. Each **pass** through the program takes around 2 minutes, once that time expires, another **pass** commences
+3. The **hw** project was created to demonstrate LINQ queries against the database
+4. The **api** project was created to demonstrate using HTTP Endpoints to request data to the browser that also uses LINQ queries.
+5. Each project - **client**,**hw**,**api** - must be run from within their own project folder.
+
 ## Entity Framework Core
 
 Follow the steps in this tutorial carefully: [Getting Started with EF Core](https://docs.microsoft.com/en-us/ef/core/get-started/?tabs=netcore-cli)
