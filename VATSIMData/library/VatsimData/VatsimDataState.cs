@@ -65,7 +65,7 @@ namespace VatsimLibrary.VatsimData
                             switch(record.Clienttype)
                             {
                                 case "ATC":
-                                    VatsimDbHepler.UpdateOrCreateATC(record.GetVatsimClientATCFromRecord());
+                                    VatsimDbHepler.UpdateOrCreateATCAsync(record.GetVatsimClientATCFromRecord());
                                     break;
 
                                 case "PILOT":
@@ -75,9 +75,9 @@ namespace VatsimLibrary.VatsimData
                                         // check to see that this pilot has an IFR Plan Active
                                         if(IFRFlightPlanActive(record))
                                         {
-                                            VatsimDbHepler.UpdateOrCreatePilot(record.GetVatsimClientPilotFromRecord());
-                                            VatsimDbHepler.UpdateOrCreateFlight(record.GetVatsimClientPlannedFlightFromRecord());
-                                            VatsimDbHepler.CreatePosition(record.GetVatsimClientPilotSnapshotFromRecord());
+                                            VatsimDbHepler.UpdateOrCreatePilotAsync(record.GetVatsimClientPilotFromRecord());
+                                            VatsimDbHepler.UpdateOrCreateFlightAsync(record.GetVatsimClientPlannedFlightFromRecord());
+                                            VatsimDbHepler.CreatePositionAsync(record.GetVatsimClientPilotSnapshotFromRecord());
                                         }
                                     }
                                     break;

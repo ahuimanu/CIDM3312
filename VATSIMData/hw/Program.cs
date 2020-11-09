@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 
-using VatsimLibrary.VatsimClientV1;
 using VatsimLibrary.VatsimDb;
 
 namespace hw
@@ -17,15 +15,26 @@ namespace hw
             using(var db = new VatsimDbContext())
             {
 
-                var _pilots = db.Pilots.Select(p => p).ToList();
-                Console.WriteLine($"The number of pilots records is: {_pilots.Count} ");
+                Console.WriteLine($"The number of pilots records is: {db.Pilots.Count()} ");
 
                 //find A319
                 var _aircraft = db.Flights.Where(f => f.PlannedAircraft.Contains("A319"));
                 Console.WriteLine($"It is likely that there are {_aircraft.Count()} A319s in the data");
 
                 _aircraft = db.Flights.Where(f => f.PlannedAircraft.Contains("B738"));
-                Console.WriteLine($"It is likely that there are {_aircraft.Count()} B738s in the data");                
+                Console.WriteLine($"It is likely that there are {_aircraft.Count()} B738s in the data");
+
+                var _depList = db.Flights.ToList();
+
+                //departure most
+                 var _dep = _depList.GroupBy(f => f.PlannedDepairport).OrderByDescending(g => g.Count());
+
+                Console.WriteLine($"{_dep.ElementAt(0).Key} - {_dep.ElementAt(0).Count()}");
+
+                // foreach(var flight in _dep)
+                // {
+                //     Console.WriteLine($"{flight.Key} - {flight.Count()}");
+                // }
             }            
         }
 

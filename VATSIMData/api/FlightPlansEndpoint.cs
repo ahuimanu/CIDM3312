@@ -39,45 +39,46 @@ namespace api
 
         public static async Task OriginAirportEndpoint(HttpContext context)
         {
-            string answer = null;
-            string flight = context.Request.RouteValues["flightplans"] as string;
-            switch((flight ?? "").ToLower())
-            {
-                case "flight":
-                    answer = "Cool";
-                    break;
-            }
+            string responseText = null;
+            string flightDeparture = context.Request.RouteValues["departure"] as string;
 
-            if(flight != null)
+            using(var db = new VatsimDbContext())
             {
-                await context.Response.WriteAsync($"{answer} looks like a lady");
-            }
-            else
-            {
-                context.Response.StatusCode = StatusCodes.Status404NotFound;
+                if(flightDeparture != null)
+                {
+                    Console.WriteLine($"{flightDeparture}");
+
+                    var _departure = await db.Flights.Where(f => f.PlannedDepairport == (flightDeparture ?? "").ToUpper()).ToListAsync();
+                    responseText = $"It is likely that at least {_departure.Count()} flights have departred from {flightDeparture}";                    
+                    await context.Response.WriteAsync($"RESPONSE: {responseText}");
+                }
+                else
+                {
+                    context.Response.StatusCode = StatusCodes.Status404NotFound;
+                }
             }
         }
 
         public static async Task DestinationAirportEndpoint(HttpContext context)
         {
-            string answer = null;
-            string flight = context.Request.RouteValues["flightplans"] as string;
-            switch((flight ?? "").ToLower())
-            {
-                case "flight":
-                    answer = "Cool";
-                    break;
-            }
+            string responseText = null;
+            string flightDestination = context.Request.RouteValues["departure"] as string;
 
-            if(flight != null)
+            using(var db = new VatsimDbContext())
             {
-                await context.Response.WriteAsync($"{answer} looks like a lady");
-            }
-            else
-            {
-                context.Response.StatusCode = StatusCodes.Status404NotFound;
+                if(flightDestination != null)
+                {
+                    Console.WriteLine($"{flightDestination}");
+
+                    var _departure = await db.Flights.Where(f => f.PlannedDestairport == (flightDestination ?? "").ToUpper()).ToListAsync();
+                    responseText = $"It is likely that at least {_departure.Count()} flights have arrived at {flightDestination}";                    
+                    await context.Response.WriteAsync($"RESPONSE: {responseText}");
+                }
+                else
+                {
+                    context.Response.StatusCode = StatusCodes.Status404NotFound;
+                }
             }
         }
-
     }
 }

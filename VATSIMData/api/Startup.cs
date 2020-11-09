@@ -39,11 +39,15 @@ namespace api
                     await context.Response.WriteAsync("VATSIM Data API");
                 });
 
-                //using an endpoint to do the work
-                endpoints.MapGet("pilots/{callsign}", PilotsEndpoint.CallsignEndpoint);
+                //PILOTS endpoints
+                endpoints.MapGet("pilots/callsign/{callsign}", PilotsEndpoint.CallsignEndpoint);
 
-                endpoints.MapGet("flights/{type}", FlightPlansEndpoint.AircraftTypeEndpoint);
+                //TODO: complete the remaining pilots endpoints here
 
+                //FLIGHTS endpoints
+                endpoints.MapGet("flights/type/{type}", FlightPlansEndpoint.AircraftTypeEndpoint);
+                endpoints.MapGet("flights/departure/{departure}", FlightPlansEndpoint.OriginAirportEndpoint);
+                endpoints.MapGet("flights/destination/{destination}", FlightPlansEndpoint.DestinationAirportEndpoint);
             });
 
             // end of the line
