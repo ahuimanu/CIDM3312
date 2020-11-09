@@ -10,7 +10,7 @@ namespace hw
         static void Main(string[] args)
         {
 
-            Console.WriteLine($"{VatsimDbHepler.DATA_DIR}");
+            Console.WriteLine($"{VatsimDbHelper.DATA_DIR}");
 
             using(var db = new VatsimDbContext())
             {

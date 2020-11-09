@@ -27,8 +27,8 @@ namespace VatsimLibrary.VatsimDb
 
         public VatsimDbContext()
         {
-            VatsimDataReader.EnsureDataDirectoryExists(VatsimDbHepler.DATA_DIR);
-            this.dbfile = $@"{VatsimDbHepler.DATA_DIR}\vatsim.db";
+            VatsimDataReader.EnsureDataDirectoryExists(VatsimDbHelper.DATA_DIR);
+            this.dbfile = $@"{VatsimDbHelper.DATA_DIR}\vatsim.db";
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)

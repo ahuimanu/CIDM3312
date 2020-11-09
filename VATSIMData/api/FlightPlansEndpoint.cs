@@ -62,7 +62,7 @@ namespace api
         public static async Task DestinationAirportEndpoint(HttpContext context)
         {
             string responseText = null;
-            string flightDestination = context.Request.RouteValues["departure"] as string;
+            string flightDestination = context.Request.RouteValues["destination"] as string;
 
             using(var db = new VatsimDbContext())
             {

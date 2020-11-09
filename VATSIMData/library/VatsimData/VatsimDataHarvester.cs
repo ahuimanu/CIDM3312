@@ -15,7 +15,7 @@ namespace VatsimLibrary.VatsimData
     public class VatsimDataHarvester
     {
 
-        private const int INTERVAL = 180 * 1000;
+        private const int INTERVAL = 120 * 1000;
         private static System.Timers.Timer clock { get; set; }
 
         public static void Run(DateTime stop)
@@ -49,7 +49,8 @@ namespace VatsimLibrary.VatsimData
             Console.WriteLine($"Starting: {DateTime.UtcNow.ToLongTimeString()}");
 
             await VatsimDataReader.ProcessVatsimData();
-            VatsimDataReader.CurrentVatsimData.ProcessVatsimClientRecords();
+            // VatsimDataReader.CurrentVatsimData.ProcessVatsimClientRecords();
+            VatsimDataReader.CurrentVatsimData.BatchProcessVatsimClientRecords();
             
             Console.WriteLine($"Completed: {DateTime.UtcNow.ToLongTimeString()}");
         }

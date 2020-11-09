@@ -12,12 +12,12 @@ using VatsimLibrary.VatsimData;
 
 namespace VatsimLibrary.VatsimDb
 {
-    public class VatsimDbHepler
+    public class VatsimDbHelper
     {
 
         public static readonly string DATA_DIR;
 
-        static VatsimDbHepler()
+        static VatsimDbHelper()
         {
             DirectoryInfo data_dir = new DirectoryInfo(Environment.CurrentDirectory);
             DATA_DIR = $@"{data_dir.Parent}\data\";
@@ -48,9 +48,10 @@ namespace VatsimLibrary.VatsimDb
                 }
                 else
                 {
-                    DateTime old_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(_controller.TimeLogon);
-                    DateTime new_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(controller.TimeLogon);
-                    if(new_time > old_time)
+                    // DateTime old_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(_controller.TimeLogon);
+                    // DateTime new_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(controller.TimeLogon);
+
+                    if(LogonTimeIsMoreRecent(_controller.TimeLogon, controller.TimeLogon))
                     {
                         await db.AddAsync(controller);
                         await db.SaveChangesAsync();
@@ -67,7 +68,7 @@ namespace VatsimLibrary.VatsimDb
             }
         }
 
-        public static async void CreateATCFromListAsync(IEnumerable<VatsimClientATCV1> controllers)
+        public static async void CreateControllersFromListAsync(IEnumerable<VatsimClientATCV1> controllers)
         {
             using(var db = new VatsimDbContext())
             {
@@ -76,7 +77,7 @@ namespace VatsimLibrary.VatsimDb
             }   
         }        
 
-        public static async void UpdateATCFromListAsync(IEnumerable<VatsimClientATCV1> controllers)
+        public static async void UpdateControllersFromListAsync(IEnumerable<VatsimClientATCV1> controllers)
         {
             using(var db = new VatsimDbContext())
             {
@@ -111,9 +112,9 @@ namespace VatsimLibrary.VatsimDb
                 }
                 else
                 {
-                    DateTime old_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(_pilot.TimeLogon);
-                    DateTime new_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(pilot.TimeLogon);
-                    if(new_time > old_time)
+                    // DateTime old_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(_pilot.TimeLogon);
+                    // DateTime new_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(pilot.TimeLogon);
+                    if(LogonTimeIsMoreRecent(_pilot.TimeLogon, pilot.TimeLogon))
                     {
                         await db.AddAsync(pilot);
                         await db.SaveChangesAsync();
@@ -127,6 +128,24 @@ namespace VatsimLibrary.VatsimDb
                         Log.Information($"Updated Pilot: {pilot} in DB");
                     }
                 }
+            }
+        }
+
+        public static async void CreatePilotsFromListAsync(IEnumerable<VatsimClientPilotV1> pilots)
+        {
+            using(var db = new VatsimDbContext())
+            {
+                await db.Pilots.AddRangeAsync(pilots);
+                await db.SaveChangesAsync();                
+            }   
+        }        
+
+        public static async void UpdatePilotsFromListAsync(IEnumerable<VatsimClientPilotV1> pilots)
+        {
+            using(var db = new VatsimDbContext())
+            {
+                db.Pilots.UpdateRange(pilots);
+                await db.SaveChangesAsync();
             }
         }
 
@@ -168,9 +187,9 @@ namespace VatsimLibrary.VatsimDb
                 else
                 {
                     // log.Info($"Flight found in DB: {_flight.ToString()}");
-                    DateTime old_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(_flight.TimeLogon);
-                    DateTime new_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(flight.TimeLogon);
-                    if(new_time > old_time)
+                    // DateTime old_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(_flight.TimeLogon);
+                    // DateTime new_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(flight.TimeLogon);
+                    if(LogonTimeIsMoreRecent(_flight.TimeLogon, flight.TimeLogon))
                     {
                         await db.AddAsync(flight);
                         await db.SaveChangesAsync();
@@ -186,6 +205,24 @@ namespace VatsimLibrary.VatsimDb
                 }
             }
         }
+
+        public static async void CreateFlightsFromListAsync(IEnumerable<VatsimClientPlannedFlightV1> flights)
+        {
+            using(var db = new VatsimDbContext())
+            {
+                await db.Flights.AddRangeAsync(flights);
+                await db.SaveChangesAsync();                
+            }   
+        }
+
+        public static async void UpdateFlightsFromListAsync(IEnumerable<VatsimClientPlannedFlightV1> flights)
+        {
+            using(var db = new VatsimDbContext())
+            {
+                db.Flights.UpdateRange(flights);
+                await db.SaveChangesAsync();
+            }
+        }        
 
         /// <summary>
         /// Save a position to the database
@@ -205,6 +242,22 @@ namespace VatsimLibrary.VatsimDb
                     Log.Information($"Added Position: {position} to DB");
                 }
             }
+        }
+
+        public static async void CreatePositionsFromListAsync(IEnumerable<VatsimClientPilotSnapshotV1> positions)
+        {
+            using(var db = new VatsimDbContext())
+            {
+                await db.Positions.AddRangeAsync(positions);
+                await db.SaveChangesAsync();                
+            }   
+        }        
+
+        public static bool LogonTimeIsMoreRecent(string logontime_old, string logontime_new)
+        {
+            DateTime old_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(logontime_old);
+            DateTime new_time = VatsimDataState.GetDateTimeFromVatsimTimeStamp(logontime_new);
+            return new_time > old_time;
         }
     }
 }

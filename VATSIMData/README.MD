@@ -108,6 +108,12 @@ Part II of Freeman's book discusses some of the basic mechanics of how an HTTP R
 
 I have created Request/Response Endpoints similar to chapters 12-14.
 
+For Flights, I have created the following endpoints:
+
+* `/flights/type/{type}` - where `{type}` is a placeholder/segment for an aircraft type code (common: A320, B738, B77L, A319, B737)
+* `/flights/departure/{departure}` - where `{depature}` is a placeholder/segment for an the departure airprt (common: EDDF, EGGL, KATL, KLAX, RJAA)
+* `/flights/destination/{destination}` - where `{destination}` is a placeholder/segment for an the destination airprt (common: EDDF, EGGL, KATL, KLAX, RJAA)
+
 # Using ASP.NET MVC/RazorPages to Work with this data
 
 
