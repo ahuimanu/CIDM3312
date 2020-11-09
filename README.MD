@@ -19,7 +19,7 @@ Here is a [quick and dirty guide](http://rogerdudler.github.io/git-guide/)
 
 * Party Invites (from the book)
 * LINQ queries
-* VATSIM Data
+* [VATSIM Data](https://github.com/ahuimanu/CIDM3312/tree/master/VATSIMData)
 
 ## ASP.NET Core Materials
 
