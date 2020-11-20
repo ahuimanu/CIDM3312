@@ -41,6 +41,7 @@ namespace api
 
                 //PILOTS endpoints
                 endpoints.MapGet("pilots/callsign/{callsign}", PilotsEndpoint.CallsignEndpoint);
+                endpoints.MapGet("pilots/groundspeed/{callsign}", PilotsEndpoint.GroundspeedEndpoint);
 
                 //TODO: complete the remaining pilots endpoints here
 
