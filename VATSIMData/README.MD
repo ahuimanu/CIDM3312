@@ -187,3 +187,21 @@ Across chapters 18-23, Freeman covers these topics, each of which is at the "cor
 First, Freeman tells us how to add Razor Pages support to the App.
 
 Along with his code, this also requires that we add this package: `dotnet add package Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation --version 3.1.10`
+
+## How to Run:
+
+All you need is the VATSIMData project.
+
+* with your terminal in the root `VATSIMData` folder:
+    * `dotnet restore`
+    * `dotnet build`
+* go into the `client` application and run it at least once with this command: `dotnet run 6` (this is the number of minutes to run)
+* go into the webapp folder and run it with: `dotnet run`
+* using your browser, go here: `http://localhost:5000/pilots/search`
+* Try sorting the columns
+* Go to the details page
+
+## YOUR FINAL PROJECT TASKS
+
+You can see what I want you to add to this details page in the details page itself.
+
