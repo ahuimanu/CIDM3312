@@ -1,0 +1,95 @@
+  
+@page
+@model PilotSearchModel
+@{ 
+    Layout = null;
+    /* Borrowing from this: https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/sort-filter-page?view=aspnetcore-3.1 */
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="bg-primary text-white text-center m-2 p-2">Pilots</div>
+
+        @* <form>
+            @Html.AntiForgeryToken()        
+            <div class="form-group">
+                <p>
+                    Find Pilot Callsign:
+                    <label for="searchStringInput">Callsign</label>
+                    <input type="text"  class="form-control" name="searchStringInput" value="@Model.CurrentFilter" />
+                    <small id="searchstringHelp" class="form-text text-muted">Search for all or part of a callsign</small>
+                    <input type="submit" value="Search" class="btn btn-primary" /> |
+                    <a asp-page="./Index">Back to full List</a>
+                </p>
+            </div>
+        </form> *@
+
+        <div class="m-2">
+            <table class="table table-sm table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            CID
+                        </th>
+                        <th>
+                            <a asp-page="/Pilots/Search" asp-route-sortOrder="@Model.RealnameSort">
+                                Real Name
+                            </a>
+                        </th>
+                        <th>
+                            <a asp-page="/Pilots/Search" asp-route-sortOrder="@Model.CallsignSort">
+                                Callsign
+                            </a>
+                        </th>
+                        <th>
+                            <a asp-page="/Pilots/Search" asp-route-sortOrder="@Model.TimelogonSort">
+                                Time Logon
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Pilots)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(p => item.Cid)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(p => item.Realname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(p => item.Callsign)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(p => item.TimeLogon)
+                            </td>
+                            <td>
+                                <a asp-page="/Pilots/Detail" 
+                                   asp-route-cid="@item.Cid"
+                                   asp-route-callsign="@item.Callsign"
+                                   asp-route-timelogon="@item.TimeLogon"
+                                   class="btn btn-info">Details</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @* <form method="post">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label>Price</label>
+                    <input name="price" class="form-control" 
+                        value="@Model.Product.Price" />
+                </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form> *@
+        </div>
+    </div> @* container *@
+</body>
+</html>

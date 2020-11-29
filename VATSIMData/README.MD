@@ -185,3 +185,5 @@ Across chapters 18-23, Freeman covers these topics, each of which is at the "cor
 ### Simplicity of Razor Pages
 
 First, Freeman tells us how to add Razor Pages support to the App.
+
+Along with his code, this also requires that we add this package: `dotnet add package Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation --version 3.1.10`

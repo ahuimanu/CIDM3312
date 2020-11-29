@@ -1,0 +1,18 @@
+@page
+@model ListModel 
+
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" /> 
+    </head> 
+    <body> 
+        <h5 class="bg-primary text-white text-center m-2 p-2">Pilots</h5>
+        <ul class="list-group m-2"> 
+            @foreach (string pilot in Model.Pilots) 
+            { 
+                <li class="list-group-item">@pilot</li> 
+            } 
+        </ul> 
+    </body> 
+</html> 

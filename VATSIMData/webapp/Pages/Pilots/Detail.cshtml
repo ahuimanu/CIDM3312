@@ -1,0 +1,34 @@
+@page
+@model PilotDetailModel
+@{ 
+    Layout = null;
+    /* Borrowing from this: https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/sort-filter-page?view=aspnetcore-3.1 */
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>DUDE, YOU'RE GETTIN' A DELL</h1>
+        <ul>
+            <li>
+                @Model.Pilot.Cid
+            </li>            
+            <li>
+                @Model.Pilot.Realname
+            </li>
+            <li>
+                @Model.Pilot.Callsign
+            </li>
+        </ul>
+        <p>
+            <a asp-page="/Pilots/Search">
+                Back to Pilot Search
+            </a>
+        </p>
+    </div>
+</body>
+</html>

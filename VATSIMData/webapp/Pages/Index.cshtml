@@ -1,0 +1,28 @@
+@page "{cid?}/{callsign?}/{timelogon?}"
+@model IndexModel
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@using VatsimLibrary.VatsimClientV1
+@using VatsimLibrary.VatsimDb
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />    
+</head>
+<body>
+    <div class="bg-primary text-white text-center m-2 p-2">@Model.Pilot.Realname</div>
+</body>
+</html>
+
+@functions {
+
+    /*
+    while it is normal to include this in a "code behind" file, it is also pretty handy to be able to
+    define things for this page right here, like you would with JavaScript or PHP
+    */
+
+
+}
