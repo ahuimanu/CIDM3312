@@ -171,3 +171,17 @@ Here we use:
 Further, enable both RazorPages and MVC in a webapp simply by what we add to *Configure* and *ConfigureServices* in `Startup.cs`
 
 Generally, Chapter 19 neatly packages the same thing we did in endpoints into a convenient package that returns JSON.
+
+## Chapter 23
+
+While the MVC material in Chapters 20 and 21 is useful, we just want to create a few simple views to grab the data from the Library Database Service.  [Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-3.1&tabs=visual-studio) are a simplification of what is available in [ASP.NET Core MVC](https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-3.1).
+
+Across chapters 18-23, Freeman covers these topics, each of which is at the "core" (no pun) of what ASP.NET Core offers. Microsoft also offers tutorials for these:
+
+* [MVC-based Web Apps](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/?view=aspnetcore-3.1) - Regretably these are discouraged for little good reason by Microsoft
+* [Web Api apps](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-3.1&tabs=visual-studio)
+* [Razor Pages Web Apps](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/?view=aspnetcore-3.1)
+
+### Simplicity of Razor Pages
+
+First, Freeman tells us how to add Razor Pages support to the App.

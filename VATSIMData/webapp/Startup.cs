@@ -23,8 +23,8 @@ namespace VATSIMData.WebApp
             //bring in the vatsim library for the db context
             services.AddDbContext<VatsimLibrary.VatsimDb.VatsimDbContext>();
 
-            //if we want to use MVC, we simply add in controllers
-            services.AddControllers();
+            //if we want to use MVC, we simply add in controllers 
+            services.AddControllersWithViews();
 
             // JSON serializer config
             services.Configure<JsonOptions>(opts => {
@@ -59,6 +59,8 @@ namespace VATSIMData.WebApp
                 // controllers
                 // endpoints.MapWebService();
                 endpoints.MapControllers();
+                // add in default route of home controller
+                endpoints.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{cid?}");
             });
 
             // we skip the database seeding as the client program handles that
