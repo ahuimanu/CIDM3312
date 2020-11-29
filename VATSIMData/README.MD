@@ -195,11 +195,21 @@ All you need is the VATSIMData project.
 * with your terminal in the root `VATSIMData` folder:
     * `dotnet restore`
     * `dotnet build`
-* go into the `client` application and run it at least once with this command: `dotnet run 6` (this is the number of minutes to run)
-* go into the webapp folder and run it with: `dotnet run`
+* go into the `client` application folder and run it at least once with this command: `dotnet run 6` (this is the number of minutes to run)
+* go into the `webapp` folder and run it with: `dotnet run`
 * using your browser, go here: `http://localhost:5000/pilots/search`
 * Try sorting the columns
 * Go to the details page
+
+Still to come from me in the search page:
+
+* filtering
+* pagination
+
+**Sources**:
+
+* [Freeman Chapters 18-23](https://github.com/Apress/pro-asp.net-core-3)
+* [Razor Pages with Entity Framework Core in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-3.1&tabs=visual-studio)
 
 ## YOUR FINAL PROJECT TASKS
 
