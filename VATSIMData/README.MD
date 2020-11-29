@@ -137,4 +137,37 @@ For Flights, I have created the following endpoints:
 
 # Using ASP.NET MVC/RazorPages to Work with this data
 
+## Chapter 18
 
+In chapter 18, freeman sets up a shell project for the third part of the book.  We'll appropriate most of it here.
+
+Things that Freeman does:
+
+1. At the top of *VATSIMData* make sure we've created a globaljson file
+2. make a new directory called webapp and run this inside of it: `dotnet new web --no-https --framework netcoreapp3.1`
+3. Create models (we already have the **data** project, so we're good here)
+4. The packages he adds will be a little different in our case:
+    1. `dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.1.10`
+    2. `dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 3.1.10` <-- not the same as the book
+    3. `dotnet tool uninstall --global dotnet-ef` <-- gets rid of existing version
+    4. `dotnet tool install --global dotnet-ef --version 3.1.10` <-- current version that is NOT .NET 5
+5. Freeman uses **LibMab** to install front-end dependencies
+    1. `dotnet tool uninstall --global Microsoft.Web.LibraryManager.Cli` <-- Get rid of old version
+    2. `dotnet tool install --global Microsoft.Web.LibraryManager.Cli --version 2.1.113`
+    3. install twitter bootstrap: 
+        1. `libman init -p cdnjs`
+        1. `libman install twitter-bootstrap@4.5.3 -d wwwroot/lib/twitter-bootstrap`
+
+We also create the `TestMiddleware.cs` class that he creates but instead wire that up to the library.
+
+## Chapter 19
+
+This chapter presents a more structured way to call and retrieve data like our EndPoits did.
+
+Here we use:
+* [JavaScript Object Notation](https://www.json.org/json-en.html) to return data from the database.
+* The [Model View Controller](https://docs.microsoft.com/en-us/aspnet/core/mvc/overview?view=aspnetcore-5.0) pattern to marshal and handle endpoint requests and responses as a [Web API Project](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-5.0&tabs=visual-studio).
+
+Further, enable both RazorPages and MVC in a webapp simply by what we add to *Configure* and *ConfigureServices* in `Startup.cs`
+
+Generally, Chapter 19 neatly packages the same thing we did in endpoints into a convenient package that returns JSON.

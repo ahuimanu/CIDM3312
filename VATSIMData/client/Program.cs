@@ -27,6 +27,7 @@ namespace client
 
             if(minutes == -999)
             {
+                Console.WriteLine("Provide the number of minutes to run as an argument");
                 return;
             }
             else
