@@ -24,8 +24,8 @@
                 @Model.Pilot.Callsign
             </li>
         </ul>
-        <h2>TODO: PUT A TABLE HERE SHOWING ALL POSITIONS FOR THIS PILOT</h2>
-        <h2>TODO: PUT ANOTHER TABLE HERE SHOWING:</h2>
+        <h2 class="text-danger">TODO: PUT A TABLE HERE SHOWING ALL POSITIONS FOR THIS PILOT</h2>
+        <h2 class="text-danger">TODO: PUT ANOTHER TABLE HERE SHOWING:</h2>
         <ul>
             <li>
                 Fastest speed for this pilot
@@ -35,12 +35,15 @@
             </li>
             <li>
                 Farthest the pilot has traveled East (not to exceed 180 degrees E)
-                Farthest the pilot has traveled South (90 N is the highest and 90 S is the lowest)
+            </li>
+            <li>
+                Farthest the pilot has traveled South (90 N is the least amount of south and 90 S is most amount of south)
             </li>
             <li>
                 Airport most visited (can be from departures or arrivals)
             </li>
         </ul>
+        <p><strong>HINT:</strong> You've done MOST of these queries in previous assignment</p>
         <p>
             <a asp-page="/Pilots/Search">
                 Back to Pilot Search
