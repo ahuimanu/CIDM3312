@@ -17,13 +17,10 @@ namespace VATSIMData.WebApp.Pages {
         public string RealnameSort { get; set; }
         public string CallsignSort { get; set; }
         public string TimelogonSort { get; set; }
-
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
         public IList<VatsimClientPilotV1> Pilots { get; set; }
-
-
 
         public async Task OnGetAsync(string sortOrder) {
 

@@ -151,7 +151,7 @@ Things that Freeman does:
     2. `dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 3.1.10` <-- not the same as the book
     3. `dotnet tool uninstall --global dotnet-ef` <-- gets rid of existing version
     4. `dotnet tool install --global dotnet-ef --version 3.1.10` <-- current version that is NOT .NET 5
-5. Freeman uses **LibMab** to install front-end dependencies
+5. Freeman uses **LibMan** to install front-end dependencies
     1. `dotnet tool uninstall --global Microsoft.Web.LibraryManager.Cli` <-- Get rid of old version
     2. `dotnet tool install --global Microsoft.Web.LibraryManager.Cli --version 2.1.113`
     3. install twitter bootstrap: 

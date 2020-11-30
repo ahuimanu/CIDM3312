@@ -23,9 +23,12 @@
             <li>
                 @Model.Pilot.Callsign
             </li>
+            <li>
+                @Model.Pilot.TimeLogon
+            </li>
         </ul>
-        <h2 class="text-danger">TODO: PUT A TABLE HERE SHOWING ALL POSITIONS FOR THIS PILOT</h2>
-        <h2 class="text-danger">TODO: PUT ANOTHER TABLE HERE SHOWING:</h2>
+        <h2 class="text-danger">TODO: PUT A TABLE HERE SHOWING ALL POSITIONS FOR THIS PILOT FOR <strong>THIS SELECTED FLIGHT</strong></h2>
+        <h2 class="text-danger">TODO: PUT ANOTHER TABLE HERE SHOWING THE FOLLOWING FOR <strong>THIS SELECTED FLIGHT:</h2>
         <ul>
             <li>
                 Fastest speed for this pilot
@@ -38,9 +41,6 @@
             </li>
             <li>
                 Farthest the pilot has traveled South (90 N is the least amount of south and 90 S is most amount of south)
-            </li>
-            <li>
-                Airport most visited (can be from departures or arrivals)
             </li>
         </ul>
         <p><strong>HINT:</strong> You've done MOST of these queries in previous assignment</p>
