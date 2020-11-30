@@ -188,7 +188,7 @@ First, Freeman tells us how to add Razor Pages support to the App.
 
 Along with his code, this also requires that we add this package: `dotnet add package Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation --version 3.1.10`
 
-## How to Run:
+## How to Run the Final Project Code:
 
 All you need is the VATSIMData project.
 
