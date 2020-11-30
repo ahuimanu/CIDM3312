@@ -1,29 +1,26 @@
 using System;
+using Timers = System.Timers;
 using System.Threading;
-using System.Threading.Tasks;
-
-using VatsimLibrary.VatsimClientV1;
-using VatsimLibrary.VatsimDb;
-using VatsimLibrary.VatsimUtils;
-
 
 namespace VatsimLibrary.VatsimData
 {
     /// <summary>
     /// https://docs.microsoft.com/en-us/dotnet/api/system.timers.timer?view=netcore-3.1
+    /// @deprecated { this works outside of the asp.net proces as a stand-alone. However, we'd want to collect this information continuously
+    /// while the server is running.}
     /// </summary>
     public class VatsimDataHarvester
     {
 
         private const int INTERVAL = 120 * 1000;
-        private static System.Timers.Timer clock { get; set; }
+        private static Timers.Timer clock { get; set; }
 
         public static void Run(DateTime stop)
         {
 
             SetTimer();
+            //run the first time
             DoHarvest();
-            // Console.WriteLine("\nPress the Enter key to exit the application...\n");
             Console.WriteLine($"The application started at {DateTime.Now:HH:mm:ss.fff}");
             // Console.ReadLine();
             while(DateTime.Now <= stop)
@@ -41,7 +38,6 @@ namespace VatsimLibrary.VatsimData
             clock.Elapsed += HarvestData;
             clock.AutoReset = true;
             clock.Start();
-            //clock.Enabled = true;
         }
 
         public static async void DoHarvest()
@@ -50,7 +46,7 @@ namespace VatsimLibrary.VatsimData
 
             await VatsimDataReader.ProcessVatsimData();
             // VatsimDataReader.CurrentVatsimData.ProcessVatsimClientRecords();
-            VatsimDataReader.CurrentVatsimData.BatchProcessVatsimClientRecords();
+            await VatsimDataReader.CurrentVatsimData.BatchProcessVatsimClientRecords();
             
             Console.WriteLine($"Completed: {DateTime.UtcNow.ToLongTimeString()}");
         }
@@ -59,7 +55,6 @@ namespace VatsimLibrary.VatsimData
         {
             Console.WriteLine($"triggered at: {eea.SignalTime:HH:mm:ss.fff}");
             DoHarvest();
-
         }
     }
 }

@@ -40,7 +40,7 @@ namespace VatsimLibrary.VatsimData
 
         }
 
-        public async void BatchProcessVatsimClientRecords()
+        public async Task BatchProcessVatsimClientRecords()
         {
             // are there any clients to process?
             if(VatsimClientRecords != null && VatsimClientRecords.Count > 0)

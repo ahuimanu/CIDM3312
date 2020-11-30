@@ -192,14 +192,15 @@ Along with his code, this also requires that we add this package: `dotnet add pa
 
 All you need is the VATSIMData project.
 
-* with your terminal in the root `VATSIMData` folder:
+1. with your terminal in the root `VATSIMData` folder:
     * `dotnet restore`
     * `dotnet build`
-* go into the `client` application folder and run it at least once with this command: `dotnet run 6` (this is the number of minutes to run)
-* go into the `webapp` folder and run it with: `dotnet run`
-* using your browser, go here: `http://localhost:5000/pilots/search`
-* Try sorting the columns
-* Go to the details page
+2. **UPDATE 11/29/2020!!!** (these instructions are no longer necessary if you have downloaded the code after 11/29/2020). Go into the `client` application folder and run it at least once with this command: `dotnet run 6` (this is the number of minutes to run)
+    * WHY? Because I've implemented a [BackgroundWorker](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-5.0&tabs=visual-studio) to do this whenver the web server is running.
+3. **UPDATE 11/29/2020!!!** (you can now just do this step) Go into the `webapp` folder and run it with: `dotnet run`
+4. **WITH THE SERVER RUNNING** Point your browser here: `http://localhost:5000/pilots/search`
+    * Try sorting the columns
+    * Go to the details page for any given pilot record
 
 Still to come from me in the search page:
 
@@ -213,5 +214,5 @@ Still to come from me in the search page:
 
 ## YOUR FINAL PROJECT TASKS
 
-You can see what I want you to add to this details page in the details page itself.
+You can see what I want you to add to the details page by looking at the details page itself.
 

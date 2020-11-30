@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 
 
 using VatsimLibrary.VatsimDb;
+using VATSIMData.Worker;
 
 namespace VATSIMData.WebApp
 {
@@ -24,6 +25,9 @@ namespace VATSIMData.WebApp
         {
             //bring in the vatsim library for the db context
             services.AddDbContext<VatsimLibrary.VatsimDb.VatsimDbContext>();
+
+            //add background worker
+            services.AddHostedService<VatsimDataHarvesterWorker>();
 
             //if we want to use MVC, we simply add in controllers 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();

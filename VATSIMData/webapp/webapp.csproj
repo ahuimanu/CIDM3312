@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\library\library.csproj" />
     <ProjectReference Include="..\api\api.csproj" />
+    <ProjectReference Include="..\worker\worker.csproj" />
   </ItemGroup>
 
   <ItemGroup>
