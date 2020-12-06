@@ -1,64 +1,45 @@
 @page
 @model PilotDetailModel
 @{ 
-    Layout = null;
     /* Borrowing from this: https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/sort-filter-page?view=aspnetcore-3.1 */
+    ViewBag.Title = $"{Model.Pilot.Realname} Info";
 }
-
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="container">
-        <h1>Pilot Details</h1>
-        <ul>
-            <li>
-                @Model.Pilot.Cid
-            </li>            
-            <li>
-                @Model.Pilot.Realname
-            </li>
-            <li>
-                @Model.Pilot.Callsign
-            </li>
-            <li>
-                @Model.Pilot.TimeLogon
-            </li>
-        </ul>
-        <h2 class="text-danger">TODO: PUT A TABLE HERE SHOWING ALL POSITIONS FOR THIS PILOT FOR <strong>THIS SELECTED FLIGHT</strong></h2>
-        <h2 class="text-danger">TODO: PUT ANOTHER TABLE HERE SHOWING THE FOLLOWING FOR <strong>THIS SELECTED FLIGHT:</h2>
-        <ul>
-            <li>
-                Fastest speed for this pilot
-            </li>
-            <li>
-                Highest altitude for this pilot
-            </li>
-            <li>
-                Farthest the pilot has traveled East (not to exceed 180 degrees E)
-            </li>
-            <li>
-                Farthest the pilot has traveled South (90 N is the least amount of south and 90 S is most amount of south)
-            </li>
-        </ul>
-        <p><strong>HINT:</strong> You've done MOST of these queries in previous assignment</p>
-        <p>
-            <a asp-page="/Pilots/Search">
-                Back to Pilot Search
-            </a>
-        </p>
-    </div>
-</body>
-</html>
-
-@* I have revealed the Server JS code so that you can download and run the project code.
-
-Notes on how to use the endpoints are in the README for the CIDM3372/Project folder in the repo: https://github.com/ahuimanu/CIDM3372/tree/master/Project
-
-
-For the sunrise/sunset endpoint, try different lat/lon combos
-For the addsmetar, here is a list of ICAO codes for airports around the world: https://www.airport-data.com/world-airports/icao-code/A.html
-I will next reveal most of the client-side JS code and make it clear what you are expected to fill in.
-In the interest of a more complete example, I am leaving you not more than 5% of the work to complete. *@
+<div class="container">
+    <h1>Pilot Details</h1>
+    <ul>
+        <li>
+            @Model.Pilot.Cid
+        </li>            
+        <li>
+            @Model.Pilot.Realname
+        </li>
+        <li>
+            @Model.Pilot.Callsign
+        </li>
+        <li>
+            @Model.Pilot.TimeLogon
+        </li>
+    </ul>
+    <h2 class="text-danger">TODO: PUT A TABLE HERE SHOWING ALL POSITIONS FOR THIS PILOT FOR <strong>THIS SELECTED FLIGHT</strong></h2>
+    <h2 class="text-danger">TODO: PUT ANOTHER TABLE HERE SHOWING THE FOLLOWING FOR <strong>THIS SELECTED FLIGHT:</h2>
+    <ul>
+        <li>
+            Fastest speed for this pilot
+        </li>
+        <li>
+            Highest altitude for this pilot
+        </li>
+        <li>
+            Farthest the pilot has traveled East (not to exceed 180 degrees E)
+        </li>
+        <li>
+            Farthest the pilot has traveled South (90 N is the least amount of south and 90 S is most amount of south)
+        </li>
+    </ul>
+    <p><strong>HINT:</strong> You've done MOST of these queries in previous assignment</p>
+    <p>
+        <a asp-page="/Pilots/Search">
+            Back to Pilot Search
+        </a>
+    </p>
+</div>

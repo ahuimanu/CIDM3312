@@ -195,7 +195,7 @@ All you need is the VATSIMData project.
 1. with your terminal in the root `VATSIMData` folder:
     * `dotnet restore`
     * `dotnet build`
-2. also at the terminal, change directory into `VATSIMData\library\VatsimDb` re-run the migrations: `dotnet ef database update --project ../../webapp/webapp.csproj`
+2. **IMPORTANT!!!!** also at the terminal, change directory into `VATSIMData\library\VatsimDb` re-run the migrations: `dotnet ef database update --project ../../webapp/webapp.csproj`
 2. **UPDATE 11/29/2020!!!** (these instructions are no longer necessary if you have downloaded the code after 11/29/2020). Go into the `client` application folder and run it at least once with this command: `dotnet run 6` (this is the number of minutes to run)
     * WHY? Because I've implemented a [BackgroundWorker](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-5.0&tabs=visual-studio) to do this whenver the web server is running.
 3. **UPDATE 11/29/2020!!!** (you can now just do this step) Go into the `webapp` folder and run it with: `dotnet run`
@@ -205,12 +205,13 @@ All you need is the VATSIMData project.
 
 Still to come from me in the search page:
 
-* filtering
-* pagination
+* filtering - **Completed, 12/06/2020**
+* pagination - **Completed, 12/06/2020**
+* proper index page - **Completed, 12/06/2020**
 
 **Sources**:
 
-* [Freeman Chapters 18-23](https://github.com/Apress/pro-asp.net-core-3)
+* [Freeman Chapters 18-23](https://github.com/Apress/pro-asp.net-core-3) - Emphasis on Chapter 23 for RazorPages
 * [Razor Pages with Entity Framework Core in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-3.1&tabs=visual-studio)
 
 ## YOUR FINAL PROJECT TASKS

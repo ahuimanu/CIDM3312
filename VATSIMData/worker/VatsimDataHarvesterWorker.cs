@@ -35,10 +35,25 @@ namespace VATSIMData.Worker
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Vatsim DataHarvester Worker running at: {time}", DateTimeOffset.Now);
-                await DoHarvest();
-                await Task.Delay(INTERVAL, stoppingToken);
+                try{
+                    _logger.LogInformation("Vatsim DataHarvester Worker running at: {time}", DateTimeOffset.Now);
+                    await DoHarvest();
+                    await Task.Delay(INTERVAL, stoppingToken);
+                } 
+                catch(OperationCanceledException exp){
+                    Console.Error.WriteLine(exp.Message);
+                    _logger.LogInformation(
+                        "VATSIMData Harvester Service Hosted Service was interrupted.");
+                }
             }
+        }
+
+        public override async Task StopAsync(CancellationToken stoppingToken)
+        {
+            _logger.LogInformation(
+                "VATSIMData Harvester Service Hosted Service is stopping.");
+
+            await base.StopAsync(stoppingToken);
         }
     }
 }

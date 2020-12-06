@@ -21,7 +21,7 @@ namespace VATSIMData.WebApp.Pages
         }
         public void OnGet()
         {
-            Pilots = db.Pilots;
+            Pilots = db.Pilots.Take(30);
         }
     }
 }

@@ -3,19 +3,12 @@
 @using Microsoft.AspNetCore.Mvc.RazorPages
 @using VatsimLibrary.VatsimClientV1
 @using VatsimLibrary.VatsimDb
-
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <title>Not Found</title>
-</head>
-<body>
-    <div class="bg-primary text-white text-center m-2 p-2">No Matching ID</div>
-    <ul class="list-group m-2">
-        @foreach (VatsimClientPilotV1 p in Model.Pilots) {
-            <li class="list-group-item">@p.Realname (CID: @p.Cid)</li>
-        }
-    </ul>    
-</body>
-</html>
+@{
+    ViewBag.Title = "No Matching ID";
+}
+<p>Showing the first records...</p>
+<ul class="list-group m-2">
+    @foreach (VatsimClientPilotV1 p in Model.Pilots) {
+        <li class="list-group-item">@p.Realname (CID: @p.Cid | Callsign: @p.Callsign | Logon: @p.TimeLogon )</li>
+    }
+</ul>
